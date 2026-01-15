@@ -1,0 +1,19 @@
+#root {
+  min-height: 100vh;
+}
+
+main {
+  color: #0f172a;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #e5e7eb;
+  margin: 24px 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
