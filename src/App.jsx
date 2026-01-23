@@ -18,7 +18,7 @@ import ProconBase from "./pages/bases/Procon.jsx";
 import Base4BIZ from "./pages/bases/4biz.jsx";
 
 // Playbooks
-import Playbook4BIZ from "./pages/bases/playbooks/Playbook4BIZ.jsx";
+import Playbook4BIZ from "./pages/bases/playbooks/Playbook4biz.jsx";
 import PlaybookCPRO from "./pages/bases/playbooks/PlaybookCPRO.jsx";
 import PlaybookITAU from "./pages/bases/playbooks/PlaybookITAU.jsx";
 import PlaybookOPS from "./pages/bases/playbooks/PlaybookOPS.jsx";
