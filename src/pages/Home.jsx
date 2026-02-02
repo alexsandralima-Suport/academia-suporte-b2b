@@ -33,7 +33,7 @@ export default function Home() {
 
           <Card
             img="/img/icon_ip.png"
-            title="IP"
+            title="GESTÃO AVANÇADA COM RELATÓRIOS  (IP)"
             text="Respostas rápidas sobre edição de termos monitorados, acesso a faturas e boletos, navegadores suportados e acompanhamento de processos no Digesto IP."
             link="/faqs/ip"
           />
@@ -47,14 +47,14 @@ export default function Home() {
 
           <Card
             img="/img/icon_4biz.png"
-            title="4BIZ"
+            title="PESQUISA JURÍDICA E JUS IA (4BIZ)"
             text="Orientações para resolver o não recebimento do link de acesso."
             link="/faqs/4biz"
           />
 
           <Card
             img="/img/icon_cpro.png"
-            title="CPRO"
+            title="BACKGROUND CHECK (CPRO)"
             text="Esclarece dúvidas sobre associação nome-CPF, limites de processos, critérios de cobrança, atualização de documentos, status dos processos e regras de consulta no ConsultaPRO."
             link="/faqs/cpro"
           />

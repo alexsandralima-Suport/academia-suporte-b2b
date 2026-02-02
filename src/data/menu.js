@@ -2,11 +2,11 @@ export const menu = [
   {
     title: "FAQs",
     items: [
-      { label: "4BIZ", path: "/faqs/4biz" },
+      { label: "Pesquisa Jurídica e Jus IA (4BIZ)", path: "/faqs/4biz" },
       { label: "API Jusbrasil", path: "/faqs/apijs" },
-      { label: "CPRO", path: "/faqs/cpro" },
+      { label: "Background Check (CPRO)", path: "/faqs/cpro" },
       { label: "Hub Soluções", path: "/faqs/hs" },
-      { label: "IP", path: "/faqs/ip" },
+      { label: "Gestão Avançada com Relatórios (IP)", path: "/faqs/ip" },
       { label: "OP", path: "/faqs/op" },
       { label: "Relatórios Avançados", path: "/faqs/ra" },
       { label: "Procon", path: "/faqs/procon" },
