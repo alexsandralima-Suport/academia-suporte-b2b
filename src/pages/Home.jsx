@@ -25,7 +25,7 @@ export default function Home() {
 
         <div style={styles.grid}>
           <Card
-            img="./img/icon_api.png"
+            img="../img/icon_api.png"
             title="API JUSBRASIL SOLUÇÕES"
             text="Formas de envio do token de acesso, comportamento dos dados (tempo real ou base histórica), funcionamento do monitoramento de processos, tratamento de anexos e autos processuais, além das causas mais comuns de erros, respostas vazias e timeouts e como tratá-los corretamente."
             link="/faqs/apijs"
