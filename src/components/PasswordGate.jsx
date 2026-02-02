@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const PASSWORD = import.meta.env.VITE_SITE_PASSWORD;
+const PASSWORD = import.meta.env.VITE_SITE_PASSWORD || "1234";
 
 
 export default function PasswordGate({ children }) {
