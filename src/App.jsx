@@ -26,6 +26,7 @@ import PlaybookOPS from "./pages/bases/playbooks/PlaybookOPS.jsx";
 
 // Vídeos de Treinamento
 import Videos from "./pages/videos/Videos.jsx";
+import Treinamentos from "./pages/videos/treinamentos.jsx";
 
 export default function App() {
   const layoutStyles = {
@@ -72,6 +73,7 @@ export default function App() {
              <Route path="/playbooks/ops" element={<PlaybookOPS />} />
              {/* Vídeos de Treinamento */}
              <Route path="/videos" element={<Videos />} />
+             <Route path="/treinamentos" element={<Treinamentos />} />
            </Routes>
          </main>
        </div>

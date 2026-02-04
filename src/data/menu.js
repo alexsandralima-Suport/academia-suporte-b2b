@@ -32,7 +32,8 @@ export const menu = [
   {
     title: "Treinamentos",
     items: [
-      { label: "Materiais", path: "/videos" }
+      { label: "Materiais", path: "/videos" },
+      { label: "Vídeos de Treinamento", path: "/treinamentos" }
     ]
   }
 ];
