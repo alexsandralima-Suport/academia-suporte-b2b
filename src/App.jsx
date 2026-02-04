@@ -23,6 +23,8 @@ import Playbook4BIZ from "./pages/bases/playbooks/Playbook4biz.jsx";
 import PlaybookCPRO from "./pages/bases/playbooks/PlaybookCPRO.jsx";
 import PlaybookITAU from "./pages/bases/playbooks/PlaybookITAU.jsx";
 import PlaybookOPS from "./pages/bases/playbooks/PlaybookOPS.jsx";
+import PlaybookLM from "./pages/bases/playbooks/Playbooklm.jsx";
+import PlaybookManutencao from "./pages/bases/playbooks/playbook_comunicado_de_manutencao_tribunais.jsx"; 
 
 // Vídeos de Treinamento
 import Videos from "./pages/videos/Videos.jsx";
@@ -71,6 +73,8 @@ export default function App() {
              <Route path="/playbooks/cpro" element={<PlaybookCPRO />} />
              <Route path="/playbooks/itau" element={<PlaybookITAU />} />
              <Route path="/playbooks/ops" element={<PlaybookOPS />} />
+              <Route path="/playbooks/lm" element={<PlaybookLM />} />
+              <Route path="/playbooks/manutencao" element={<PlaybookManutencao />} />
              {/* Vídeos de Treinamento */}
              <Route path="/videos" element={<Videos />} />
              <Route path="/treinamentos" element={<Treinamentos />} />

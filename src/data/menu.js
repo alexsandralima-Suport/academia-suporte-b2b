@@ -26,6 +26,8 @@ export const menu = [
       { label: "4BIZ", path: "/playbooks/4biz" },
       { label: "CPRO", path: "/playbooks/cpro" },
       { label: "Itaú", path: "/playbooks/itau" },
+      { label: "LM", path: "/playbooks/lm" },
+      { label: "Comunicado de Manutenção dos Tribunais", path: "/playbooks/manutencao" },
       { label: "Legal Ops", path: "/playbooks/ops" }
     ]
   },
