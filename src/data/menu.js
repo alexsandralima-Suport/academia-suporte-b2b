@@ -17,6 +17,7 @@ export const menu = [
     title: "Bases de Conhecimento",
     items: [
       { label: "Procon", path: "/bases/procon" },
+      {label: "CPRO", path: "/bases/cpro"},
       { label: "4biz", path: "/bases/4biz" }
     ]
   },
