@@ -25,11 +25,15 @@ import PlaybookCPRO from "./pages/bases/playbooks/PlaybookCPRO.jsx";
 import PlaybookITAU from "./pages/bases/playbooks/PlaybookITAU.jsx";
 import PlaybookOPS from "./pages/bases/playbooks/PlaybookOPS.jsx";
 import PlaybookLM from "./pages/bases/playbooks/Playbooklm.jsx";
-import PlaybookManutencao from "./pages/bases/playbooks/playbook_comunicado_de_manutencao_tribunais.jsx"; 
+import PlaybookManutencao from "./pages/bases/playbooks/playbook_comunicado_de_manutencao_tribunais.jsx";
 
 // Vídeos de Treinamento
 import Videos from "./pages/videos/Videos.jsx";
 import Treinamentos from "./pages/videos/treinamentos.jsx";
+
+// Game
+import Quiz from "./pages/certificado/certificado.jsx";
+
 
 export default function App() {
   const layoutStyles = {
@@ -49,42 +53,48 @@ export default function App() {
   };
   return (
     <PasswordGate>
-     <BrowserRouter>
-       <div style={layoutStyles.container}>
-         <Sidebar />
-         <main style={layoutStyles.main}>
-           <Routes>
-             {/* Home */}
-             <Route path="/" element={<Home />} />
-             {/* FAQs */}
-             <Route path="/faqs/4biz" element={<Faq4BIZ />} />
-             <Route path="/faqs/apijs" element={<FaqAPIJS />} />
-             <Route path="/faqs/cpro" element={<FaqCPRO />} />
-             <Route path="/faqs/hs" element={<FaqHS />} />
-             <Route path="/faqs/op" element={<FaqOP />} />
-             <Route path="/faqs/ip" element={<FaqIP />} />
-             <Route path="/faqs/RA" element={<FaqRA />} />
-             <Route path="/faqs/procon" element={<FaqProcon />} />
-             <Route path="/faqs/intimacoes" element={<FaqIntimacoes />} />
-             {/* Bases */}
-             <Route path="/bases/procon" element={<ProconBase />} />
-            <Route path="/bases/4biz" element={<Base4BIZ />} />
-            <Route path="/bases/cpro" element={<Basecpro/>} />
-             {/* Playbooks */}
-             <Route path="/playbooks/4biz" element={<Playbook4BIZ />} />
-             <Route path="/playbooks/cpro" element={<PlaybookCPRO />} />
-             <Route path="/playbooks/itau" element={<PlaybookITAU />} />
-             <Route path="/playbooks/ops" element={<PlaybookOPS />} />
+      <BrowserRouter>
+        <div style={layoutStyles.container}>
+          <Sidebar />
+          <main style={layoutStyles.main}>
+            <Routes>
+              {/* Home */}
+              <Route path="/" element={<Home />} />
+              {/* FAQs */}
+              <Route path="/faqs/4biz" element={<Faq4BIZ />} />
+              <Route path="/faqs/apijs" element={<FaqAPIJS />} />
+              <Route path="/faqs/cpro" element={<FaqCPRO />} />
+              <Route path="/faqs/hs" element={<FaqHS />} />
+              <Route path="/faqs/op" element={<FaqOP />} />
+              <Route path="/faqs/ip" element={<FaqIP />} />
+              <Route path="/faqs/RA" element={<FaqRA />} />
+              <Route path="/faqs/procon" element={<FaqProcon />} />
+              <Route path="/faqs/intimacoes" element={<FaqIntimacoes />} />
+              {/* Bases */}
+              <Route path="/bases/procon" element={<ProconBase />} />
+              <Route path="/bases/4biz" element={<Base4BIZ />} />
+              <Route path="/bases/cpro" element={<Basecpro />} />
+              {/* Playbooks */}
+              <Route path="/playbooks/4biz" element={<Playbook4BIZ />} />
+              <Route path="/playbooks/cpro" element={<PlaybookCPRO />} />
+              <Route path="/playbooks/itau" element={<PlaybookITAU />} />
+              <Route path="/playbooks/ops" element={<PlaybookOPS />} />
               <Route path="/playbooks/lm" element={<PlaybookLM />} />
               <Route path="/playbooks/manutencao" element={<PlaybookManutencao />} />
-             {/* Vídeos de Treinamento */}
-             <Route path="/videos" element={<Videos />} />
-             <Route path="/treinamentos" element={<Treinamentos />} />
-           </Routes>
-         </main>
-       </div>
-     </BrowserRouter>
-  </PasswordGate>
+              {/* Vídeos de Treinamento */}
+              <Route path="/videos" element={<Videos />} />
+              <Route path="/treinamentos" element={<Treinamentos />} />
+            </Routes>
+
+            {/* Game */}
+              <Routes>
+            <Route path="/quiz" element={<Quiz />} />
+          </Routes>
+
+        </main>
+      </div>
+    </BrowserRouter>
+  </PasswordGate >
   );
 }
 

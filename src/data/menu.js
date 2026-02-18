@@ -38,5 +38,13 @@ export const menu = [
       { label: "Materiais", path: "/videos" },
       { label: "Vídeos de Treinamento", path: "/treinamentos" }
     ]
-  }
+  },
+
+  {
+    title: "Game",
+    items: [
+      { label: "Quiz", path: "/quiz" }
+    ]
+  },
+
 ];
