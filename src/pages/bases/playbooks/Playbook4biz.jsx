@@ -1,350 +1,428 @@
-export default function Playbook4BIZ() {
-  const pageStyles = {
-    container: {
-      maxWidth: "100%",
-      margin: "0 auto"
-    },
-    section: {
-      marginBottom: "40px"
-    },
-    imageContainer: {
-      display: "flex",
-      flexWrap: "wrap",
-      gap: "20px",
-      margin: "24px 0",
-      justifyContent: "center"
-    },
-    image: {
-      maxWidth: "100%",
-      width: "auto",
-      height: "auto",
-      borderRadius: "4px",
-      margin: "0"
-    },
-    code: {
-      backgroundColor: "#f5f5f5",
-      padding: "3px 8px",
-      borderRadius: "3px",
-      fontFamily: "monospace",
-      fontSize: "14px",
-      color: "#004033"
-    }
-  };
-
+export default function Base4BIZ() {
   return (
-    <div style={pageStyles.container}>
-      <h1>Playbook – 4BIZ</h1>
+    <>
+      <h1>Base de Conhecimento – 4BIZ</h1>
+      <p>
+        Este material foi elaborado para auxiliar o time de suporte na compreensão
+        de análises e possíveis cenários mapeados.
+      </p>
 
-      <div style={pageStyles.section}>
-        <h2>Visão geral</h2>
-        <p>
-          Os planos corporativos do Jusbrasil são voltados para multiusuários e
-          oferecem as mesmas funcionalidades disponíveis na contratação
-          individual.
-        </p>
-        <p>
-          Esse modelo é destinado a organizações que precisam de{" "}
-          <strong>5 ou mais acessos</strong>, como escritórios de advocacia,
-          departamentos jurídicos e instituições públicas (tribunais, OABs etc.).
-        </p>
-      </div>
+      <hr />
 
-      <div style={pageStyles.section}>
-        <h2>Classificação de porte dos clientes</h2>
-        <p>
-          A classificação é realizada pelo time de CS com base na quantidade de
-          logins contratados:
-        </p>
-        <ul>
-          <li><strong>Small:</strong> de 5 a 15 logins</li>
-          <li><strong>Mid:</strong> de 16 a 30 logins</li>
-          <li><strong>Big:</strong> acima de 30 logins</li>
-        </ul>
-      </div>
+      <h2>1. Modais de Limite Atingido</h2>
+      <p>
+        <strong>Descrição:</strong> esta categoria se refere às situações em que o
+        sistema exibe um modal de bloqueio por limite de uso ou restrição
+        contratual. Abaixo, os principais cenários com seus respectivos contextos.
+      </p>
 
-      <div style={pageStyles.section}>
-        <h2>Funcionalidades disponíveis</h2>
-        <ul>
-          <li>Pesquisa básica</li>
-          <li>Consulta processual</li>
-          <li>Pesquisa avançada</li>
-          <li>Pesquisa avançada + acompanhamento processual</li>
-          <li>Pesquisa de jurisprudência (exclusivo para CNJ)</li>
-          <li>Pesquisa avançada + Jus IA</li>
-          <li>
-            Pesquisa avançada + acompanhamento de processos + Jus IA
-          </li>
-          <li>Plano gratuito</li>
-        </ul>
-      </div>
+      <h3>1.1 Plano contratado não possui módulo de processos</h3>
+      <ul>
+        <li>
+          <strong>Informação interna:</strong> clientes legados podem ter pacotes
+          antigos, nos quais a consulta processual era vendida separadamente.
+        </li>
+        <li>
+          Mesmo com nomes como <strong>“Pesquisa Básica”</strong> ou{" "}
+          <strong>“Pesquisa Avançada”</strong>, o módulo de processos pode não
+          estar incluído.
+        </li>
+        <li>
+          Usuários novos dessas contas podem tentar usar a funcionalidade sem
+          saber que não têm acesso.
+        </li>
+      </ul>
 
-      <div style={pageStyles.section}>
-        <h2>Contrato e cobrança</h2>
-        <p>
-          O contrato possui validade de <strong>1 ou 2 anos</strong>. A cobrança
-          pode ser realizada de forma:
-        </p>
-        <ul>
-          <li>Mensal</li>
-          <li>Anual</li>
-          <li>Bianual</li>
-        </ul>
-        <p>
-          No momento da venda, o time de <strong>Sales</strong> aciona o time de{" "}
-          <strong>Billing</strong>, que passa a ser responsável pela gestão
-          financeira do contrato.
-        </p>
-        <div style={pageStyles.imageContainer}>
+      <h3>1.2 Limite de consultas por CPF ou CNPJ atingido</h3>
+      <ul>
+        <li>
+          Existe um limite mensal de <strong>100 consultas</strong> por CPF/CNPJ
+          por organização.
+        </li>
+        <li>
+          Esse limite não é informado ao cliente. Após atingi-lo, qualquer nova
+          consulta é bloqueada.
+        </li>
+      </ul>
+
+      <h3>1.3 Limite de acompanhamento de processos atingido</h3>
+      <ul>
+        <li>
+          Sempre que o cliente baixa um documento ou clica em{" "}
+          <strong>“verificar processo”</strong> no JPV, o sistema começa a
+          monitorar automaticamente aquele processo.
+        </li>
+        <li>
+          Cada usuário contribui com <strong>5 acompanhamentos</strong>, somando ao
+          limite total da organização.
+        </li>
+        <li>
+          Exemplo: <strong>5 usuários contratados → 5 x 5 = 25 acompanhamentos</strong>{" "}
+          no total.
+        </li>
+        <li>
+          O limite é <strong>compartilhado</strong> (não é fracionado por usuário).
+        </li>
+        <li>
+          Um único perfil pode utilizar todos os acompanhamentos disponíveis na
+          conta.
+        </li>
+        <li>
+          O plano foi estruturado para um mínimo de 5 usuários, então mesmo que a
+          organização tenha menos usuários cadastrados, o limite mínimo de{" "}
+          <strong>25 acompanhamentos</strong> permanece (vinculado ao plano, não à
+          quantidade de acessos ativos).
+        </li>
+      </ul>
+
+      <p>
+        <strong>Importante:</strong> independente da forma de consulta (CPF, CNPJ,
+        nome da parte ou número do processo), o que conta para o limite é o{" "}
+        <strong>número de processos acompanhados</strong>, não o tipo de dado
+        consultado.
+      </p>
+
+      <p>
+        <strong>Observação (problema conhecido):</strong> existe uma distorção nos
+        dados exibidos no campo <code>monitor_lawsuit</code> do Toolbelt, causada
+        pela alternância entre ambientes após a separação do EO e JPV.
+      </p>
+      <ul>
+        <li>
+          Processos acompanhados no <strong>JPV</strong> aparecem apenas no JPV.
+        </li>
+        <li>
+          Acompanhamentos feitos no <strong>EO</strong> aparecem apenas no EO.
+        </li>
+        <li>
+          Os ambientes são independentes e os créditos não são unificados.
+        </li>
+        <li>O limite de consultas e acompanhamentos não é informado ao cliente.</li>
+      </ul>
+
+      <h3>1.4 Não permite o download de documentos (ambiente JPV)</h3>
+      <ul>
+        <li>
+          Clicar em <strong>“verificar processo”</strong> ou{" "}
+          <strong>“baixar documento”</strong> ativa automaticamente o
+          acompanhamento do processo.
+        </li>
+        <li>
+          Se o limite de acompanhamento da organização já tiver sido atingido, o
+          download será bloqueado.
+        </li>
+      </ul>
+
+      <h3>1.5 Não permite baixar peças processuais</h3>
+      <ul>
+        <li>
+          O sistema bloqueia o download das peças processuais até que a OAB do
+          usuário seja verificada.
+        </li>
+        <li>
+          Enquanto a verificação não for concluída, o acesso permanece
+          indisponível.
+        </li>
+      </ul>
+
+      <h4>Regra de Produto – Acesso ao módulo de Peças</h4>
+      <p>
+        Desde <strong>05/12/2023</strong>, o acesso ao módulo de peças processuais
+        foi restrito a usuários com <strong>OAB validada</strong>.
+      </p>
+
+      <h4>Como funciona a validação</h4>
+      <p>
+        Quando o usuário se identifica como advogado(a), uma modal de validação é
+        exibida solicitando:
+      </p>
+      <ul>
+        <li>CPF</li>
+        <li>Data de nascimento</li>
+        <li>Telefone</li>
+        <li>Dados da OAB</li>
+      </ul>
+      <p>
+        A validação é feita via integração com serviços da Receita Federal e OAB
+        (via sistema chamado <strong>Severino</strong>).
+      </p>
+      <p>
+        <strong>Importante:</strong> após 1 ano, a validação da OAB costuma
+        expirar, e o usuário precisará refazer o processo de verificação para
+        continuar acessando peças processuais.
+      </p>
+
+      <hr />
+
+      <h2>2. Procedimento para Análise de Bloqueio de Funcionalidade</h2>
+
+      <h3>2.1 Se der para identificar o cenário pelo relato/print</h3>
+      <p>Adapte o discurso diretamente conforme o contexto identificado:</p>
+
+      <ul>
+        <li>
+          Se tentou baixar um arquivo:{" "}
+          <em>
+            “Você lembra qual era o processo ou documento que tentou baixar? Pode
+            me passar o dado e o e-mail da conta? Assim consigo testar por aqui.”
+          </em>
+        </li>
+        <li>
+          Se tentou acompanhar um processo:{" "}
+          <em>
+            “Consegue me enviar o número do processo e o e-mail logado? Isso vai
+            ajudar a entender certinho onde o bloqueio ocorreu.”
+          </em>
+        </li>
+        <li>
+          Se tentou consultar por CPF/CNPJ:{" "}
+          <em>
+            “Pode me informar qual CPF ou CNPJ usou na consulta? E o e-mail da
+            conta? Com isso consigo reproduzir aqui e te ajudar melhor.”
+          </em>
+        </li>
+        <li>
+          Se tentou baixar alguma peça processual:{" "}
+          <em>
+            “Pode me informar o e-mail da conta que estava usando? Assim consigo
+            verificar aqui internamente o que pode ter acontecido.”
+          </em>
+        </li>
+      </ul>
+
+      <p>
+        <strong>Importante:</strong> sempre solicitar o e-mail do cliente.
+      </p>
+
+      <p>
+        Se o cliente perguntar por que o e-mail é necessário, responda:
+        <br />
+        <em>
+          “Precisamos do e-mail para identificar corretamente o seu perfil e
+          consultar as configurações do plano da sua organização, tá bem?”
+        </em>
+      </p>
+
+      <h3>2.2 Se não der para identificar o cenário no primeiro contato</h3>
+      <p>Sugestão de abordagem:</p>
+      <p>
+        <em>
+          “Para que possamos compreender com mais precisão a origem da mensagem
+          de limite apresentada, você pode nos informar qual ação estava
+          executando no momento? Por exemplo: estava tentando realizar uma
+          consulta por CPF, número do processo, acompanhar algum processo
+          específico ou baixar um arquivo/peça processual?”
+        </em>
+      </p>
+
+      <p>Dados que devemos solicitar para reproduzir o cenário:</p>
+      <ul>
+        <li>O dado utilizado na tentativa (CPF, número do processo etc.)</li>
+        <li>O e-mail da conta utilizada</li>
+        <li>O nome da organização à qual a conta pertence</li>
+      </ul>
+
+      <p>
+        Mensagem sugerida ao cliente:
+        <br />
+        <em>
+          “Para que possamos reproduzir o cenário internamente e investigar com
+          mais precisão, você pode, por gentileza, nos informar: o dado utilizado
+          (ex: CPF, número do processo etc.), o e-mail da conta utilizada e o
+          nome da organização à qual a conta pertence?”
+        </em>
+      </p>
+
+      <p>
+        Se o cliente questionar o motivo do e-mail, responda:
+        <br />
+        <em>
+          “Precisamos desses dados para identificar corretamente o seu perfil e
+          consultar as configurações do plano da sua organização, tudo bem?”
+        </em>
+      </p>
+
+      <hr />
+
+      <h2>3. Simulação e reprodução do bloqueio (Jarvis + Take Over)</h2>
+
+      <h3>3.1 Consultar o e-mail no Jarvis</h3>
+      <p>
+        No Slack, execute o comando no app do Jarvis:
+        <br />
+        <code>profiles-by-email emaildocliente</code>
+      </p>
+
+      <h3>3.2 Acessar o link do perfil retornado</h3>
+      <p>
+        No retorno do Jarvis, clique no link após <strong>“Link do perfil”</strong>{" "}
+        para abrir o perfil completo do cliente.
+      </p>
+
+      <p>
+        <strong>Dica:</strong> quando o comando retorna dois conjuntos de dados
+        para o mesmo e-mail, isso significa que o e-mail do perfil administrativo
+        da organização é o mesmo do perfil pessoal do administrador.
+      </p>
+
+      <p>Interpretação dos retornos:</p>
+      <ul>
+        <li>Primeiro retorno: perfil individual do administrador (pessoa física)</li>
+        <li>Segundo retorno: perfil do grupo/organização (perfil institucional)</li>
+      </ul>
+
+      <h3>3.3 Realizar Take Over</h3>
+      <p>
+        Acesse a conta do cliente via Take Over e tente reproduzir exatamente a
+        ação relatada, usando os dados fornecidos.
+      </p>
+
+      <hr />
+
+      <h2>4. Simulação no JPV (dica de filtros)</h2>
+      <p>Para realizar testes e simulações com mais precisão:</p>
+      <ol>
+        <li>No canto superior esquerdo, clique em <strong>“JPV”</strong> ou <strong>“Para Você”</strong>.</li>
+        <li>No menu lateral esquerdo, selecione <strong>“Pesquisa Jurídica”</strong>.</li>
+        <li>
+          No campo <strong>“Todos”</strong>, aplique o filtro conforme o tipo de
+          análise (ex: Consulta Processual, Modelos, Peças Processuais, etc.).
+        </li>
+      </ol>
+
+        <img
+        src="https://lh3.googleusercontent.com/sitesv/AAzXCked0-Id4TnC6Zl1JUMr5RcZfSmoXcc4IUF0dXFOt5Bvf13qN3ahOAoOIRYqKo_hmcHLoLdt6dB5kuEVk8XQ0mwK4kI847UrUXegW9MHvxgRigxegSRw9M7KFbC5mjn3JMKHrX0DPOUfb2YTVntluGpnwSSbKH8PIZL4H3hSRbur79fIk0FAgXuAtd8I2VDwckk786-QcFZNX4WnNQaeNZ-iYp1hH3UZz0iWCD0=w1280"
+        alt="Tela de exemplo do Digesto IP"
+        style={{ maxWidth: "70%", margin: "16px 0", borderRadius: 8 }}
+      />
+
+      <h3>4.1 Testar se a organização não possui módulo de processos</h3>
+      <ol>
+        <li>No JPV, faça uma consulta por CPF.</li>
+        <li>Em seguida, faça uma consulta por número do processo.</li>
+      </ol>
+      <p>
+        Se o modal aparecer em ambas as tentativas, é provável que a organização
+        não possua o módulo de processos contratado (cliente legado).
+      </p>
+
+      <h3>4.2 Limite de consultas por CPF/CNPJ</h3>
+      <ol>
+        <li>Acesse JPV → Pesquisa Jurídica.</li>
+        <li>Selecione o filtro <strong>Consulta Processual</strong>.</li>
+        <li>Digite um CPF ou CNPJ para testar.</li>
+      </ol>
+      <p>
+        Se o modal aparecer, a conta pode ter atingido o limite mensal de 100
+        consultas por CPF/CNPJ (compartilhado entre todos os usuários).
+      </p>
+
+      <h3>4.3 Limite de acompanhamento de processos</h3>
+      <ol>
+        <li>Após consultar um processo, clique em <strong>Verificar Processo</strong> ou no ícone do sino.</li>
+      </ol>
+      <p>
+        Se o modal aparecer, é provável que o limite de acompanhamento tenha sido
+        alcançado.
+      </p>
+
+      <h3>4.4 Download de documentos (JPV)</h3>
+      <p>
+        Tente baixar um documento de um processo. O bloqueio geralmente ocorre
+        quando o limite de acompanhamento foi atingido, já que o sistema tenta
+        acompanhar automaticamente ao clicar em “baixar”.
+      </p>
+
+      <h3>4.5 Peças processuais bloqueadas (OAB não verificada)</h3>
+      <p>
+        Tente acessar alguma peça processual ou modelo jurídico. Se o acesso for
+        negado, é provável que a OAB do usuário ainda não esteja verificada.
+      </p>
+
+      <hr />
+
+      <h2>5. Como investigar se o grupo não possui o módulo de processos</h2>
+      <p>
+        <strong>Informação interna:</strong> atenção com clientes legados: antes,
+        a consulta processual era comercializada separadamente. Hoje, todos os
+        pacotes já incluem consulta processual, mas clientes legados podem estar
+        com planos antigos.
+      </p>
+
+      <h3>5.1 Opção 1: teste no ambiente do usuário</h3>
+      <ol>
+        <li>No JPV, faça uma consulta por CPF.</li>
+        <li>Em seguida, faça uma consulta por número do processo.</li>
+      </ol>
+      <p>
+        Se o modal aparecer em ambas as tentativas, é provável que a organização
+        não possua o módulo de processos contratado.
+      </p>
           <img
-            src="https://lh3.googleusercontent.com/sitesv/AAzXCkdX-NWVMjD-scuwVJ6_bnSqpLxUGvBvE59E9-WRaRTiLMtdN2L6aPJb43FvMc1BOuc1ZCug1Ktw7WDzpbFBpJiEMplLaXy3UDBddCBcpFb-XBNzVRiMvSJ0aExZ7nN8n_UZRXK2cGr0t_wb6oBF_332Kr6LkFXy96TJJxpYw4dZ3PicECMFKJgwdsCjkbF0IrGQJ3t4-APxgPn5MXflWXb4JGbqX4tQ3IGqeH4=w1280"
-            alt="Tela de exemplo do Digesto IP"
-            style={pageStyles.image}
-          />
-          <img 
-            src="https://lh3.googleusercontent.com/sitesv/AAzXCkcUA5-2E0-F0SZMks4Jch-P5M86X9GTcuzEMnw6TTGCxBNlkRB_dCprL6r5-c6OlBL2xsg7hF4jl98UOVtujaz9u7lWJCLFUyyCu1ql2ylytp2QvMsGphYb5HDuhZ9GgNKFDTNRThKkMxB2DAoEQDzwbotRU68VcknxuItUz4VwFa8oZkNzexZo8aqi30Wb_OUc7_xNg_utdUq6lzMwwKK-6-zR7eaUvubhc0Y=w1280"
-            alt="Tela de exemplo do Digesto IP"
-            style={pageStyles.image}
-          />
-        </div>
-      </div>
+        src="https://lh3.googleusercontent.com/sitesv/AAzXCkfuP4qyiav6bykKGtZnespPlAemGdbUXcQpyvHZYh8dn5oveWYT8FkYKgMdWMevipn9TvBdeAt6QIGsUyydT4yj-Pr5bFoDak4JNC20qdpBx-o68fF2VTAxJ998B501KcbAou1ycUjrjy6Hy9Lrl1Ri-9IKsrC99dR_CDro3iQ770w-n3ERUVwtv2A=w1280"
+        alt="Tela de exemplo do Digesto IP"
+        style={{ maxWidth: "45%", margin: "16px 0", borderRadius: 8 }}
+      />
+       <img
+        src="https://lh3.googleusercontent.com/sitesv/AAzXCkcfNGTSqdWBfB8C4tF2if7yMsoz9eU-dj79QRvmLZZM7R8WkGW4qbRSRJ30HXBzzMz-ccKqj_Sjd5LkV8a4FVOxdd_-nYcUlnC93MgVs-GBqKMrlB5zOv4Z3jNDaAjxy39PdI0D3gM0OQpR8B77Z4UZHjaaJ_AeSsSFrU37nJcKj4GFgbbjGONkouwSAapHCH-IjbMjhFCydRDzVQs3JEBhYs6lYXStxmjN9g8=w1280"
+        alt="Tela de exemplo do Digesto IP"
+        style={{ maxWidth: "50%", margin: "16px 0", borderRadius: 8 }}
+      />
+        <img
+        src="https://lh3.googleusercontent.com/sitesv/AAzXCkfC8v_7hTjKAExFHBDpy_1irNH-4RqRIpvz74BqeIOdGKfyn92cu6EvewkunMXD68uX9GJuE6WB3io5G0R8kXE_8MfD-yIkUfwn3JLumaymAvXfr86Nu0DbQAUNOeAxrOFDgPOoBWmFn-TS5pZ8TXLs33caMk1R6qGYqAsh04suyb1Jkz7z6N7wrLm_B0iFrWlu9l0k02C8tMTaSvBNEwlOcbCyCoKcWiojPpE=w1280"
+        alt="Tela de exemplo do Digesto IP"
+        style={{ maxWidth: "45%", margin: "16px 0", borderRadius: 8 }}
+      />
+      <img
+        src="https://lh3.googleusercontent.com/sitesv/AAzXCkcmorEVd7TYWObXXSlUvkBhqEud6fY9yZrpUXlVzGU_7ZhB08j7uVLG5uEdKJV0DSKcpcK_3qG9Jm8ufFXYQyAFGBbh2qmF7EEt7_EEDGLefpzkYuMeGNDLOrOFoZ_rVdk1IVFlbqLPGTocWen9JzxqqMeYeWgQRwiPkj_RmZ2PPpftIku09ZJJq6tGUmDBBv0cWlRXLXUbofjV58RBRuOtrb2_wqeIa1fQ=w1280"
+        alt="Tela de exemplo do Digesto IP"
+        style={{ maxWidth: "40%", margin: "16px 0", borderRadius: 8 }}
+      />
+      <h3>5.2 Opção 2: conferir o plano no perfil do grupo</h3>
+      <ol>
+        <li>No link do perfil do grupo, clique nos três pontinhos → <strong>Gerenciar</strong>.</li>
+        <li>
+          Verifique o campo <strong>Plano</strong>. Se aparecer{" "}
+          <strong>“Pesquisa Jurídica para Empresas”</strong>, isso indica que a
+          organização não possui um plano de processos no pacote.
+        </li>
+        <li>
+          Verifique o campo <strong>Plano</strong>. Se aparecer{" "}
+          <strong>“Acompanhamento de processos”</strong>, isso indica que a
+          organização possui um plano de processos no pacote.
+        </li>
+      </ol>
+       <img
+        src="https://lh3.googleusercontent.com/sitesv/AAzXCkesnXbWy9mTAP7wkLso6AD6RCsQQUuurOkV10cUdIsd--lpCIFwT3JkIdIMMJ9yX_naq5H7YtNcrccBhSigqJ84pV518sE_p2Eq3vix5UTTYEGfkO5DZsIzVFRC_8Io_OyDwbaVQ9OfJ1_iMvcmbb5N8jYEAlU6fKqCF_XuYhim4XL8s9ASJVwbgfDMkzPbWfe2iQZOxsgqKpjt_ZQxGoReUTcao8M3cw=w1280"
+        alt="Tela de exemplo do Digesto IP"
+        style={{ maxWidth: "50%", margin: "16px 0", borderRadius: 8 }}
+      />
+       <img
+        src="https://lh3.googleusercontent.com/sitesv/AAzXCkeRaqEMccHYJWONFZUNLNM8SKB0YpwqLrFP4YTMV0GhLmARYnuiJgEmPnJwjB2Geo6KdG3bUpS4hvVku6CMbN8XoQMyPWWmDWtkAIl-v2zBM9p6AxQEx1VjROu3XZTKL2pQp_ofBecIiKwTUZEoiZOSHB4-Dl7cMRPOt0CalQd3J8EK8TdVlRjX2sjZQYSUM9gZFDONgv9Q7DvD-EhPv_5SlMCOMKMUoHoe99E=w1280"
+        alt="Tela de exemplo do Digesto IP"
+        style={{ maxWidth: "45%", margin: "16px 0", borderRadius: 8 }}
+      />
+      <p>
+        <strong>Importante:</strong> essa validação deve ser feita pelo perfil do
+        grupo. Ainda não mapeamos com precisão o significado de cada item exibido
+        no perfil do usuário individual, por isso não recomendamos usar essa
+        visão para análise caso não tenha o link do perfil do grupo.
+      </p>
 
-      <div style={pageStyles.section}>
-        <h2>Jarvis (Slack)</h2>
-        <p>
-          O <strong>Jarvis</strong> é o bot interno utilizado para acessar
-          rapidamente dados de usuários e organizações.
-        </p>
-        <p>
-          <strong>Comando mais utilizado:</strong>
-          <br />
-          <code style={pageStyles.code}>profiles-by-email emaildousuario</code>
-        </p>
-
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "32px",
-            alignItems: "flex-start",
-            marginTop: "24px",
-            marginBottom: "24px"
-          }}
-        >
-          <div style={{ flex: "1 1 320px", minWidth: 280 }}>
-            <h3 style={{ marginTop: 0 }}>Interpretação dos retornos</h3>
-            <p>
-              Quando o comando retorna dois conjuntos de dados para o mesmo e-mail:
-            </p>
-            <ul>
-              <li>
-                <strong>Primeiro retorno:</strong> perfil individual do administrador
-                (pessoa física)
-              </li>
-              <li>
-                <strong>Segundo retorno:</strong> perfil da organização (perfil
-                institucional)
-              </li>
-            </ul>
-          </div>
-          <img
-            src="https://lh3.googleusercontent.com/sitesv/AAzXCkcSr1jYICGOs8RwHkjgNl6YPdifpMOAfYAJw6Q0sjxrn4LmLAVoWjLd7tkQZHRU-M_5pfyc3dpPB-dquZUQTiD_3ryV6VRboI1O0zwVOFc6-ZPl1a0o7BkanUBkwC2tNNUEvDZaKV7GDR0tO87HqRo75odWqypoLoixHeyr7k5AEbDWoDMmbeJNb_2O6P_hMkei_VTN3_WCjAtrIN8Xk8hfrT3Ew3ytYs5b=w1280"
-            alt="Tela de exemplo do Digesto IP"
-            style={{
-              flex: "0 0 400px",
-              maxWidth: "100%",
-              borderRadius: "8px",
-              boxShadow: "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
-              alignSelf: "flex-start"
-            }}
-          />
-        </div>
-        <p>
-          É no perfil da organização que é possível acessar:
-        </p>
-        <ul>
-          <li>Convites pendentes</li>
-          <li>Informações de consumo</li>
-          <li>Gestão de usuários</li>
-          <li>Dados gerais da conta corporativa</li>
-        </ul>
-
-        <h3>Apenas um perfil retornado</h3>
-        <p>
-          Quando o Jarvis retorna apenas um perfil, isso indica que o e-mail está
-          vinculado somente a um perfil individual e não a uma organização como
-          administrador.
-        </p>
-      </div>
-
-      <div style={pageStyles.section}>
-        <h2>Campos retornados pelo Jarvis</h2>
-        <ul>
-          <li><strong>Nome:</strong> nome do perfil (usuário ou organização)</li>
-          <li><strong>PID:</strong> identificador único do perfil</li>
-          <li><strong>UID:</strong> identificador interno do usuário</li>
-          <li><strong>Username:</strong> identificador público do perfil</li>
-          <li><strong>Email:</strong> e-mail vinculado ao perfil</li>
-          <li><strong>Link do perfil:</strong> acesso ao perfil público</li>
-          <li>
-            <strong>Link BoxToolbelt:</strong> acesso às permissões e limites
-          </li>
-        </ul>
-      </div>
-
-      <div style={pageStyles.section}>
-        <h2>BoxToolbelt</h2>
-        <p>
-          Ferramenta utilizada para verificar limites de uso e permissões da conta.
-        </p>
-        <p>
-          <strong>Importante:</strong> certifique-se de{" "}
-          <strong>não estar em takeover</strong> antes de acessar.
-        </p>
-
-        <h3>Campos importantes</h3>
-        <ul>
-          <li>
-            <strong>view_ls_entity_content_upper_bound:</strong> limite total de
-            acompanhamento de processos
-          </li>
-          <li>
-            <strong>monitor_lawsuit:</strong> limite total de consultas por CPF
-          </li>
-        </ul>
-
-        <h3>Como interpretar os dados</h3>
-        <ul>
-          <li><strong>Limite:</strong> total disponível</li>
-          <li><strong>Usado:</strong> quantidade consumida</li>
-          <li>
-            <strong>Data de Expiração:</strong> data de renovação automática
-          </li>
-        </ul>
-      </div>
-
-      <div style={pageStyles.section}>
-        <h2>Mandioca</h2>
-        <p>
-          Ferramenta utilizada para verificar e remover usuários da blacklist.
-        </p>
-      </div>
-
-      <div style={pageStyles.section}>
-        <h2>Metabase (antigo Kibana)</h2>
-        <p>
-          Utilizado para investigar se e-mails foram enviados corretamente quando
-          o usuário não está na blacklist.
-        </p>
-        <p>
-          Utilize o filtro <strong>"To Address"</strong> para buscar pelo e-mail do
-          usuário.
-        </p>
-        <div style={pageStyles.imageContainer}>
-          <img
-            src="https://lh3.googleusercontent.com/sitesv/AAzXCkfhyKaPG6h8RKLXB3ggmgFS7Mb9qOTVszX_vAhizpuYe2EPpdiGd5TOSslyPB-PdbegUXBIxqwdsuFa1PX0b8sNB_fFyByYLA0uiqTwlmd0qGHRGtS5oBw_AoiPRPV-8a2gmrd2HLjJIXaILmhqcIzWjiSyQjKUUiyFgqiKiu31slULyMscLHXTpNHUoSG448PrSY4IJyyzh4OwRmENoZ8V_7QISHbSIYE72Os=w1280"
-            alt="Tela de exemplo do Digesto IP"
-            style={pageStyles.image}
-          />
-        </div>
-      </div>
-
-      <div style={pageStyles.section}>
-        <h2>Takeover de Conta</h2>
-        <p>
-          O takeover permite assumir temporariamente a conta do usuário para
-          reproduzir problemas ou validar configurações.
-        </p>
-        <div style={pageStyles.imageContainer}>
-          <img
-            src="https://lh3.googleusercontent.com/sitesv/AAzXCkcnt9PfFwlBBN0k38JVObQqYib2phaOenqSNvDnpEIz2YkXEPTAyexXcDM4TSQuF6GWVA-DfxHmCNQx0tGmD8XIKmiz8jXjtuBZYPyd_4gIlXJYHJ7dsTl25peeinrfWYCkZpck_ZeyhLrKGZpD9rNAhTk6t7OKZWt5LAaswa7ec5aSF1GbNUXOZ1HeAIsj8HJ7hiL_cXdwN6QzUqt-0WQVlvtaW385STg2JG8=w1280"
-            alt="Tela de exemplo do Digesto IP"
-            style={pageStyles.image}
-          />
-        </div>
-
-        <h3>Passo a passo</h3>
-        <ol>
-          <li>Execute o comando no Jarvis</li>
-          <li>Acesse o link do perfil retornado</li>
-          <li>Clique em "Gerenciar"</li>
-          <li>Role até o final e clique em "Take Over"</li>
-          <li>Senha padrão: <strong>12345</strong></li>
-        </ol>
-
-        <h3>Como sair do takeover</h3>
-        <p>
-          Clique na foto do perfil e selecione <strong>"Sair do Takeover"</strong>.
-        </p>
-
-        <p>
-          <strong>Importante:</strong> sempre finalize o takeover antes de iniciar
-          outra atividade.
-        </p>
-      </div>
-
-      <div style={pageStyles.section}>
-        <h2>Pipedrive (CRM)</h2>
-        <p>
-          O Pipedrive é o sistema onde o time de CS gerencia as contas dos clientes.
-        </p>
-
-        <h3>O que pode ser consultado</h3>
-        <ul>
-          <li>Status do contrato</li>
-          <li>Dados dos usuários vinculados</li>
-          <li>Pacotes contratados</li>
-          <li>Histórico da jornada do cliente</li>
-          <li>Responsável pela conta (CS)</li>
-        </ul>
-
-        <h3>Como localizar a conta</h3>
-        <ul>
-          <li>Busque pelo domínio do e-mail</li>
-          <li>Ou pelo nome da organização</li>
-        </ul>
-        <div style={pageStyles.imageContainer}>
-          <img
-            src="https://lh3.googleusercontent.com/sitesv/AAzXCkctquFEad_vESbRc0K12KpaNpcK-a9CauVd7QDRHU5subRiBytGVBsqYUgaPxUMO4GC6rdTQ6OOa8XmyhORklqX9eeAxM-FEQc7oya_wOvP6NoPk58y7uVypnd-XNSK7Xi6ECeCInTc34gYPwtah4OK06moRf8yTpziwILaga5G-LchETISNh1BDbOWWUkvRBKQvp_DXwm8u8CirkuuCJ4a6QgHa7NuNUrq8Xc=w1280"
-            alt="Tela de exemplo do Digesto IP"
-            style={pageStyles.image}
-          />
-        </div>
-      </div>
-
-      <div style={pageStyles.section}>
-        <h2>Mr Big</h2>
-        <p>
-          Ferramenta utilizada para identificar o plano contratado, obter o link
-          do perfil da organização e o e-mail do administrador.
-        </p>
-      </div>
-
-      <div style={pageStyles.section}>
-        <h2>EO – Escritório Online</h2>
-        <p>
-          Modelo antigo de ativação e gestão de usuários. Novos contratos não são
-          ativados via EO.
-        </p>
-        <p>
-          Contas antigas podem ainda utilizar esse modelo, mas durante renovações
-          o CS geralmente migra para o <strong>Mr Big</strong>.
-        </p>
-      </div>
-
-      <div style={pageStyles.section}>
-        <h2>Magic Link</h2>
-        <p>
-          Forma segura de acesso ao Jusbrasil sem necessidade de senha ou convite
-          manual.
-        </p>
-        <ul>
-          <li>Login via link enviado por e-mail institucional</li>
-          <li>Acesso sem senha</li>
-          <li>
-            Liberação automática para todos os e-mails do domínio contratado
-          </li>
-        </ul>
-      </div>
-    </div>
+      <h3>5.3 Opção 3: conferir o plano pelo perfil do usuário (EO)</h3>
+      <ol>
+        <li>Com Take Over, acesse o EO (Escritório Online).</li>
+        <li>Clique no ícone da engrenagem → <strong>Plano</strong>.</li>
+        <li>
+          Se aparecer <strong>“Pesquisa Jurídica para Empresas”</strong>, indica
+          que a organização não possui o plano de processos no pacote.
+        </li>
+      </ol>
+      <img
+        src="https://lh3.googleusercontent.com/sitesv/AAzXCkdwhc_NKE7kFHDRtwLavDAH0NaqNuXAsWhoHOYcKvmjVdFhvjnjC_EeOOuZT5WEHWDthA1dyMKt1plik1ZuKs9QJGHWQcPn4VxE7VpE7PR3uccNAxX-SiSUuswtK9rQFeqRADZI8Ud8TgZD7eS0uTrU0wGMxJ--uGpHrC4l3LFJsyH6sys9jK3LeRe-LotGRmpFgBEkSWZu6g1_oSLxPlod-ZLKZT4iqxwk=w1280"
+        alt="Tela de exemplo do Digesto IP"
+        style={{ maxWidth: "45%", margin: "16px 0", borderRadius: 8 }}
+      />
+    </>
   );
 }

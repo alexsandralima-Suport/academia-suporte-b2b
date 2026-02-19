@@ -168,6 +168,6 @@ Possíveis evoluções futuras:
 
 Projeto desenvolvido por
 Alexsandra Santos Lima
-Analista de Suporte - Jusbrasil Soluções
+Analista de Suporte Pleno - Jusbrasil Soluções
 
 Idealizado para facilitar o acesso ao conhecimento interno, padronizar informações e fortalecer a cultura técnica do Suporte B2B.
