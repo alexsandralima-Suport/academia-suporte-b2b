@@ -18,7 +18,7 @@ import FaqIntimacoes from "./pages/faqs/Intimacoes.jsx";
 import ProconBase from "./pages/bases/Procon.jsx";
 import Base4BIZ from "./pages/bases/4biz.jsx";
 import Basecpro from "./pages/bases/cpro.jsx";
-
+import BaseData_Collection from "./pages/bases/entendendo_data_collection.jsx";
 // Playbooks
 import Playbook4BIZ from "./pages/bases/playbooks/Playbook4biz.jsx";
 import PlaybookCPRO from "./pages/bases/playbooks/PlaybookCPRO.jsx";
@@ -74,6 +74,7 @@ export default function App() {
               <Route path="/bases/procon" element={<ProconBase />} />
               <Route path="/bases/4biz" element={<Base4BIZ />} />
               <Route path="/bases/cpro" element={<Basecpro />} />
+              <Route path="/bases/entendendo_data_collection" element={<BaseData_Collection />} />
               {/* Playbooks */}
               <Route path="/playbooks/4biz" element={<Playbook4BIZ />} />
               <Route path="/playbooks/cpro" element={<PlaybookCPRO />} />

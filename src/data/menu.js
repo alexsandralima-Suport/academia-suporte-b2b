@@ -14,11 +14,12 @@ export const menu = [
     ]
   },
   {
-    title: "Bases de Conhecimento",
+    title: " Knowledge Hub",
     items: [
       { label: "Procon", path: "/bases/procon" },
       {label: "CPRO", path: "/bases/cpro"},
-      { label: "4biz", path: "/bases/4biz" }
+      { label: "4biz", path: "/bases/4biz" },
+      { label: "Entendendo Data Collection", path: "/bases/entendendo_data_collection" },
     ]
   },
   {
@@ -33,7 +34,7 @@ export const menu = [
     ]
   },
   {
-    title: "Treinamentos",
+    title: "trainings",
     items: [
       { label: "Materiais", path: "/videos" },
       { label: "Vídeos de Treinamento", path: "/treinamentos" }
