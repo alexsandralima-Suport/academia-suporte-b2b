@@ -173,7 +173,7 @@ export default function BaseColetaArquitetura() {
                 <h2>3) Fluxo End-to-End (Visão Macro)</h2>
 
                 <h3>3.1 Fluxo de Dados</h3>
-             
+
                 <div style={{ marginTop: "12px", marginBottom: "20px" }}>
                     <img
                         src="/img/bc_fluxo_de_dados.png"
@@ -185,7 +185,7 @@ export default function BaseColetaArquitetura() {
                         }}
                     />
                 </div>
-                   <ol>
+                <ol>
                     <li>Tribunais e fontes jurídicas disponibilizam processos e artefatos públicos</li>
                     <li>Data-access atua para superar barreiras de segurança</li>
                     <li>Cobertura Processos mantém crawlers funcionando com qualidade</li>
@@ -198,8 +198,8 @@ export default function BaseColetaArquitetura() {
 
                 <h3>3.2 Links Úteis</h3>
 
-                 <p>
-                        <li>
+                <p>
+                    <li>
                         <a
                             href="https://metabase.apps.jusbr.com/dashboard/1679-distribuicao-api-cnj?data=thisday&tab=679-vis%C3%A3o-geral&tipo_sinal=api_cnj__type_new&tribunal="
                             target="_blank"
@@ -210,10 +210,10 @@ export default function BaseColetaArquitetura() {
                                 textDecoration: "underline"
                             }}
                         >
-                            Dashboard coleta sinais API CNJ</a> 
-                            </li>
+                            Dashboard coleta sinais API CNJ</a>
+                    </li>
 
-                    </p>
+                </p>
             </section>
 
             <div style={styles.divider} />
@@ -237,36 +237,36 @@ export default function BaseColetaArquitetura() {
 
                 <h3>4.3 Documentação Disponível</h3>
                 <ul>
-                      <p>
+                    <p>
                         <li>
-                        <a
-                            href="https://docs.data-collection.apps.jusbr.com/arquitetura-medalhao-framework/monocapa-bigtable-pipeline.html"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{
-                                fontWeight: "600",
-                                color: "#004033",
-                                textDecoration: "underline"
-                            }}
-                        >
-                            Monocapa BigTable Pipeline</a> - Pipeline para processamento de dados no BigTable
-                            </li>
+                            <a
+                                href="https://docs.data-collection.apps.jusbr.com/arquitetura-medalhao-framework/monocapa-bigtable-pipeline.html"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{
+                                    fontWeight: "600",
+                                    color: "#004033",
+                                    textDecoration: "underline"
+                                }}
+                            >
+                                Monocapa BigTable Pipeline</a> - Pipeline para processamento de dados no BigTable
+                        </li>
                     </p>
 
-                     <p>
+                    <p>
                         <li>
-                        <a
-                            href="https://docs.data-collection.apps.jusbr.com/arquitetura-medalhao-framework/spark_streaming_spark_config.html"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{
-                                fontWeight: "600",
-                                color: "#004033",
-                                textDecoration: "underline"
-                            }}
-                        >
-                            Spark Streaming Config </a> - Configurações para Spark Streaming
-                            </li>
+                            <a
+                                href="https://docs.data-collection.apps.jusbr.com/arquitetura-medalhao-framework/spark_streaming_spark_config.html"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{
+                                    fontWeight: "600",
+                                    color: "#004033",
+                                    textDecoration: "underline"
+                                }}
+                            >
+                                Spark Streaming Config </a> - Configurações para Spark Streaming
+                        </li>
                     </p>
                 </ul>
             </section>
@@ -376,6 +376,18 @@ export default function BaseColetaArquitetura() {
                         <li>Base lenta → throughput reduz automaticamente</li>
                     </ul>
                 </div>
+                <div style={{ marginTop: "12px", marginBottom: "20px" }}>
+                    <img
+                        src="/img/bc_data_collection_limitador_de_concorrencia.png"
+                        alt="Nova Arquitetura de Coleta"
+                        style={{
+                            maxWidth: "100%",
+                            height: "auto",
+                            borderRadius: "6px"
+                        }}
+                    />
+                </div>
+
             </section>
 
             <div style={styles.divider} />
