@@ -564,7 +564,7 @@ export default function Videos() {
           </a>
         </div>
 
-         <div style={pageStyles.materialCard}>
+        <div style={pageStyles.materialCard}>
           <h3 style={pageStyles.materialTitle}>
             22. Exportação de credenciais - Procon
           </h3>
@@ -573,6 +573,32 @@ export default function Videos() {
           </p>
           <a
             href="https://drive.google.com/file/d/126ZqMmupPNQsys2Jvenn-tdMk6PAeDu2/view"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={pageStyles.materialLink}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = "#004033";
+              e.currentTarget.style.color = "#ffffff";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = "transparent";
+              e.currentTarget.style.color = "#004033";
+            }}
+          >
+            Acessar Treinamento →
+          </a>
+        </div>
+
+        <div style={pageStyles.materialCard}>
+          <h3 style={pageStyles.materialTitle}>
+            23.
+            Treinamento | API JusSoluções
+          </h3>
+          <p>
+            Treinamento sobre API JusSoluções.
+          </p>
+          <a
+            href="https://drive.google.com/file/d/1VBMyTmn-s9YsBcSOI-fFggkAxMBjzsiy/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             style={pageStyles.materialLink}
