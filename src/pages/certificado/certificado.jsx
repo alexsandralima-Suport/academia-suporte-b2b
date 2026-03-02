@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { jsPDF } from "jspdf";
 import { questions } from "../../data/questions";
+import { studyContent } from "../../data/studyContent";
 
 /* ===============================
    Helper para carregar imagem (PNG/JPG) como DataURL
@@ -29,7 +30,7 @@ function loadImageAsDataURL(src) {
 export default function Quiz() {
   const total = questions.length;
 
-  const [step, setStep] = useState("quiz"); // "quiz" | "result" | "certificate"
+  const [step, setStep] = useState("study"); // "study" | "quiz" | "result" | "certificate"
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState(Array(total).fill(null));
   const [name, setName] = useState("");
@@ -244,7 +245,66 @@ export default function Quiz() {
   // RENDER
   // ===============================
 
+  if (step === "study") {
+  return (
+    <div style={{ maxWidth: 820, margin: "40px auto", fontFamily: "Arial" }}>
+      <h2>📚 Material de leitura</h2>
+      <p style={{ color: "#555" }}>
+        Leia o conteúdo abaixo. O quiz foi criado com base nessas informações.
+      </p>
+
+      <div style={{ display: "grid", gap: 14, marginTop: 18 }}>
+        {studyContent.map((section) => (
+          <div
+            key={section.id}
+            style={{
+              background: "#fff",
+              border: "1px solid #ddd",
+              borderRadius: 12,
+              padding: 16,
+            }}
+          >
+            <h3 style={{ margin: "0 0 8px 0", color: "#004033" }}>
+              {section.title}
+            </h3>
+            <ul style={{ margin: 0, paddingLeft: 18 }}>
+              {section.bullets.map((b, i) => (
+                <li key={i} style={{ marginBottom: 6 }}>
+                  {b}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      <div style={{ marginTop: 20, display: "flex", gap: 10 }}>
+        <button onClick={reset} style={{ opacity: 0.85 }}>
+          Reiniciar
+        </button>
+        <button
+          onClick={() => {
+            setCurrent(0);
+            setStep("quiz");
+          }}
+          style={{
+            background: "#004033",
+            color: "white",
+            border: "none",
+            padding: "10px 14px",
+            borderRadius: 10,
+            cursor: "pointer",
+          }}
+        >
+          Começar quiz
+        </button>
+      </div>
+    </div>
+  );
+}
+
   if (step === "quiz") {
+    const progressPct = Math.round(((current + 1) / total) * 100);
     const q = questions[current];
     const chosen = answers[current];
 
@@ -254,6 +314,32 @@ export default function Quiz() {
         <p>
           Pergunta {current + 1} de {total}
         </p>
+        <div style={{ margin: "10px 0 16px 0" }}>
+  <div style={{ display: "flex", justifyContent: "space-between", fontSize: 12, color: "#555" }}>
+    <span>Progresso</span>
+    <span>{progressPct}%</span>
+  </div>
+
+  <div
+    style={{
+      height: 10,
+      background: "#e6eaef",
+      borderRadius: 999,
+      overflow: "hidden",
+      marginTop: 6,
+    }}
+  >
+    <div
+      style={{
+        height: "100%",
+        width: `${progressPct}%`,
+        background: "#004033",
+        borderRadius: 999,
+        transition: "width 250ms ease",
+      }}
+    />
+  </div>
+</div>
 
         <div
           style={{
