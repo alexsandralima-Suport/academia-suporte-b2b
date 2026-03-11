@@ -5,6 +5,7 @@ import logo from "../assets/logo.jpg";
 
 export default function Sidebar() {
   const [openGroups, setOpenGroups] = useState({});
+  const [menuOpen, setMenuOpen] = useState(true);
 
   function toggleGroup(title) {
     setOpenGroups((prev) => ({
@@ -14,57 +15,90 @@ export default function Sidebar() {
   }
 
   return (
-    <aside style={styles.sidebar}>
-      {/* Logo */}
-      <div style={styles.logoContainer}>
-        <img src={logo} alt="Jusbrasil Soluções" style={styles.logo} />
-      </div>
-
-      {/* Página inicial */}
-      <NavLink
-        to="/"
-        style={({ isActive }) => ({
-          ...styles.homeLink,
-          fontWeight: isActive ? "bold" : "normal"
-        })}
+    <>
+      <button
+        onClick={() => setMenuOpen(!menuOpen)}
+        style={styles.hamburger}
       >
-        Página inicial
-      </NavLink>
+        ☰
+      </button>
 
-      {/* Menu */}
-      {menu.map((group) => (
-        <div key={group.title}>
-          <button
-            onClick={() => toggleGroup(group.title)}
-            style={styles.titleButton}
+      {menuOpen && (
+        <aside style={styles.sidebar}>
+          {/* Logo */}
+          <div style={styles.logoContainer}>
+            <img src={logo} alt="Jusbrasil Soluções" style={styles.logo} />
+          </div>
+
+          {/* Página inicial */}
+          <NavLink
+            to="/"
+            style={({ isActive }) => ({
+              ...styles.homeLink,
+              fontWeight: isActive ? 700 : 600,
+              backgroundColor: isActive ? "#004033" : "rgba(255, 255, 255, 0.06)",
+              color: "#ffffff",
+              borderLeft: isActive ? "4px solid #22c55e" : "4px solid transparent"
+            })}
           >
-            {group.title}
-            <span style={styles.icon}>
-              {openGroups[group.title] ? "−" : "+"}
-            </span>
-          </button>
+            🏠 Início
+          </NavLink>
 
-          {openGroups[group.title] &&
-            group.items.map((item) => (
-              <NavLink
-                key={item.path}
-                to={item.path}
-                style={({ isActive }) => ({
-                  ...styles.link,
-                  fontWeight: isActive ? 700 : 400,
-                  color: isActive ? "#004033" : "#e5e7eb",
-                  backgroundColor: isActive ? "rgba(0, 64, 51, 0.1)" : "transparent"
-                })}
+          {/* Menu */}
+          {menu.map((group) => (
+            <div key={group.title}>
+              <button
+                onClick={() => toggleGroup(group.title)}
+                style={styles.titleButton}
               >
-                {item.label}
-              </NavLink>
-            ))}
-        </div>
-      ))}
-    </aside>
+                {group.title}
+                <span style={styles.icon}>
+                  {openGroups[group.title] ? "−" : "+"}
+                </span>
+              </button>
+
+              {openGroups[group.title] &&
+                group.items.map((item) => (
+                  <NavLink
+                    key={item.path}
+                    to={item.path}
+                    style={({ isActive }) => ({
+                      ...styles.link,
+                      fontWeight: isActive ? 600 : 400,
+                      color: isActive ? "#ffffff" : "#e5e7eb",
+                      backgroundColor: isActive ? "#004033" : "rgba(255,255,255,0.04)",
+                      borderLeft: isActive
+                        ? "4px solid #22c55e"
+                        : "4px solid transparent",
+                      paddingLeft: isActive ? "10px" : "12px"
+                    })}
+                  >
+                    {item.label}
+                  </NavLink>
+                ))}
+            </div>
+          ))}
+        </aside>
+      )}
+    </>
   );
 }
+
 const styles = {
+  hamburger: {
+    position: "fixed",
+    top: 20,
+    left: 20,
+    fontSize: 22,
+    backgroundColor: "#004033",
+    color: "#fff",
+    border: "none",
+    padding: "8px 12px",
+    borderRadius: 8,
+    cursor: "pointer",
+    zIndex: 1000,
+    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.2)"
+  },
   sidebar: {
     width: 260,
     minHeight: "100vh",
@@ -76,7 +110,8 @@ const styles = {
   },
   logoContainer: {
     textAlign: "center",
-    marginBottom: 24
+    marginBottom: 24,
+    marginTop: 40
   },
   logo: {
     width: 140,
@@ -85,10 +120,11 @@ const styles = {
   homeLink: {
     display: "block",
     marginBottom: 24,
-    color: "#004033",
+    padding: "12px 14px",
+    borderRadius: 10,
     textDecoration: "none",
-    fontSize: 14,
-    fontWeight: 400
+    fontSize: 15,
+    transition: "all 0.2s ease"
   },
   titleButton: {
     width: "100%",
@@ -111,12 +147,14 @@ const styles = {
   },
   link: {
     display: "block",
-    padding: "8px 12px",
+    padding: "9px 12px",
     margin: "4px 6px",
     borderRadius: 8,
     textDecoration: "none",
     fontSize: 14,
     color: "#e5e7eb",
-    transition: "all 0.2s ease"
+    transition: "all 0.2s ease",
+    borderLeft: "4px solid transparent",
+    cursor: "pointer"
   }
 };

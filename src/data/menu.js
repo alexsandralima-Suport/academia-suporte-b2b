@@ -17,8 +17,8 @@ export const menu = [
     title: " Knowledge Hub",
     items: [
       { label: "Procon", path: "/bases/procon" },
-      {label: "CPRO", path: "/bases/cpro"},
-      { label: "4biz", path: "/bases/4biz" },
+      {label: "Background Check (CPRO)", path: "/bases/cpro"},
+      { label: "Pesquisa Jurídica e Jus IA (4BIZ)", path: "/bases/4biz" },
       { label: "Entendendo Data Collection", path: "/bases/entendendo_data_collection" },
       { label: "OP", path: "/bases/op" },
     ]
