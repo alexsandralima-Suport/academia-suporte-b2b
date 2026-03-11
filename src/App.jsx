@@ -19,6 +19,8 @@ import ProconBase from "./pages/bases/Procon.jsx";
 import Base4BIZ from "./pages/bases/4biz.jsx";
 import Basecpro from "./pages/bases/cpro.jsx";
 import BaseData_Collection from "./pages/bases/entendendo_data_collection.jsx";
+import BaseOP from "./pages/bases/op.jsx";  
+
 // Playbooks
 import Playbook4BIZ from "./pages/bases/playbooks/Playbook4biz.jsx";
 import PlaybookCPRO from "./pages/bases/playbooks/PlaybookCPRO.jsx";
@@ -60,6 +62,7 @@ export default function App() {
             <Routes>
               {/* Home */}
               <Route path="/" element={<Home />} />
+              
               {/* FAQs */}
               <Route path="/faqs/4biz" element={<Faq4BIZ />} />
               <Route path="/faqs/apijs" element={<FaqAPIJS />} />
@@ -70,11 +73,14 @@ export default function App() {
               <Route path="/faqs/RA" element={<FaqRA />} />
               <Route path="/faqs/procon" element={<FaqProcon />} />
               <Route path="/faqs/intimacoes" element={<FaqIntimacoes />} />
+
               {/* Bases */}
               <Route path="/bases/procon" element={<ProconBase />} />
               <Route path="/bases/4biz" element={<Base4BIZ />} />
               <Route path="/bases/cpro" element={<Basecpro />} />
               <Route path="/bases/entendendo_data_collection" element={<BaseData_Collection />} />
+              <Route path="/bases/op" element={<BaseOP />} />
+
               {/* Playbooks */}
               <Route path="/playbooks/4biz" element={<Playbook4BIZ />} />
               <Route path="/playbooks/cpro" element={<PlaybookCPRO />} />
@@ -82,6 +88,7 @@ export default function App() {
               <Route path="/playbooks/ops" element={<PlaybookOPS />} />
               <Route path="/playbooks/lm" element={<PlaybookLM />} />
               <Route path="/playbooks/manutencao" element={<PlaybookManutencao />} />
+
               {/* Vídeos de Treinamento */}
               <Route path="/videos" element={<Videos />} />
               <Route path="/treinamentos" element={<Treinamentos />} />
