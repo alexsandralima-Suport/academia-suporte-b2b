@@ -41,7 +41,7 @@ export default function Sidebar() {
               borderLeft: isActive ? "4px solid #22c55e" : "4px solid transparent"
             })}
           >
-            🏠 Início
+            🏠 Home
           </NavLink>
 
           {/* Menu */}
