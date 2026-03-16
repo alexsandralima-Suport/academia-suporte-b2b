@@ -1,112 +1,121 @@
 export const questions = [
-  // 1️⃣ 4BIZ
   {
-    id: 1,
-    question:
-      "No 4BIZ, qual é o critério para classificar um cliente como 'Mid'?",
+    id: "q1",
+    sectionId: "api-jusbrasil-solucoes",
+    question: "Como a autenticação na API Jusbrasil Soluções é realizada?",
     options: [
-      "De 5 a 15 logins",
-      "De 16 a 30 logins",
-      "Acima de 30 logins",
-      "Qualquer cliente com contrato anual",
+      "Por login e senha do usuário da plataforma",
+      "Por API Key enviada no cabeçalho de autenticação",
+      "Por CPF e token temporário",
+      "Por certificado digital obrigatório",
     ],
     answerIndex: 1,
   },
-
-  // 2️⃣ CPRO
   {
-    id: 2,
-    question:
-      "No CPRO, em caso de 'Dados Insuficientes', qual campo deve ser validado no Tuxedo para verificar quando o CPF foi vinculado ao processo?",
+    id: "q2",
+    sectionId: "api-jusbrasil-solucoes",
+    question: "O que significa um erro 429 na API Jusbrasil Soluções?",
     options: [
-      "createdAt",
-      "updatedAt",
-      "lastModified",
-      "processStatus",
-    ],
-    answerIndex: 1,
-  },
-
-  // 3️⃣ API Jusbrasil Soluções
-  {
-    id: 3,
-    question:
-      "Qual é a forma padrão de autenticação utilizada na API Jusbrasil Soluções?",
-    options: [
-      "Login e senha via formulário",
-      "Token de acesso (API Key) enviado no header Authorization",
-      "OAuth via Google",
-      "Certificado digital ICP-Brasil",
-    ],
-    answerIndex: 1,
-  },
-
-  // 4️⃣ OP (Orientações de Permissões)
-  {
-    id: 4,
-    question:
-      "No OP, como tornar um usuário administrador da empresa?",
-    options: [
-      "Solicitando diretamente ao suporte técnico",
-      "Editando o perfil do usuário e marcando a permissão 'Administrar: empresa'",
-      "Criando um novo login com domínio corporativo",
-      "Ativando o monitoramento em massa",
-    ],
-    answerIndex: 1,
-  },
-
-  // 5️⃣ Relatórios Avançados (IP)
-  {
-    id: 5,
-    question:
-      "Ao adicionar uma tag ao monitorar um processo no IP, qual ação é obrigatória para que a tag seja salva?",
-    options: [
-      "Clicar em Salvar antes de acompanhar",
-      "Selecionar o tribunal primeiro",
-      "Digitar a tag e clicar no botão +",
-      "Atualizar a página após inserir a tag",
+      "Recurso não encontrado",
+      "Problema de autenticação ou permissão",
+      "Excesso de requisições",
+      "Timeout por lentidão do tribunal",
     ],
     answerIndex: 2,
   },
-
-  // 6️⃣ Hub Soluções
   {
-    id: 6,
-    question:
-      "O Hub Soluções integra quais principais funcionalidades?",
+    id: "q3",
+    sectionId: "op",
+    question: "No OP, quem pode tornar um usuário administrador?",
     options: [
-      "Apenas Pesquisa Jurídica",
-      "Pesquisa Jurídica, Jus IA, Gestão de Processos e Relatórios Avançados",
-      "Somente monitoramento de processos",
-      "Apenas API e Consulta PRO",
+      "Qualquer usuário com acesso ao menu lateral",
+      "Apenas o time de Billing",
+      "Outro usuário que já tenha perfil de administrador",
+      "Somente o próprio usuário",
+    ],
+    answerIndex: 2,
+  },
+  {
+    id: "q4",
+    sectionId: "op",
+    question: "No OP, onde é possível cadastrar uma lista de termos em lote para monitoramento de distribuições?",
+    options: [
+      "Em Meus Processos",
+      "Em Monitorar em massa",
+      "Em Relatório por Nome",
+      "Em Cobranças",
     ],
     answerIndex: 1,
   },
-
-  // 7️⃣ Procon
   {
-    id: 7,
-    question:
-      "No módulo Procon, é possível realizar qual das ações abaixo?",
+    id: "q5",
+    sectionId: "gestao-avancada-processos",
+    question: "Para acompanhar um novo processo na Gestão Avançada de Processos, o usuário deve informar:",
     options: [
-      "Monitoramento de CIPs e reclamações",
-      "Alteração de senha do usuário",
-      "Cancelamento automático de contratos",
-      "Migração de plano 4BIZ",
+      "O e-mail do cliente",
+      "O número do ticket",
+      "O número CNJ",
+      "O CPF do advogado",
+    ],
+    answerIndex: 2,
+  },
+  {
+    id: "q6",
+    sectionId: "hub-de-solucoes",
+    question: "Segundo o material, o Jus IA usa dados dos clientes para treinar modelos externos?",
+    options: [
+      "Sim, sempre",
+      "Sim, quando autorizado pelo administrador",
+      "Não, os dados dos clientes não são usados para treinar modelos externos",
+      "Somente em contas corporativas",
+    ],
+    answerIndex: 2,
+  },
+  {
+    id: "q7",
+    sectionId: "relatorios-avancados",
+    question: "Por que um relatório com 1000 processos pode retornar 1500 linhas na aba de processos?",
+    options: [
+      "Porque cada linha representa uma instância do processo",
+      "Porque o sistema duplica linhas com erro",
+      "Porque há cobrança extra por movimentação",
+      "Porque anexos são contados como linhas separadas",
     ],
     answerIndex: 0,
   },
-
-  // 8️⃣ Intimações
   {
-    id: 8,
-    question:
-      "O módulo de Intimações é utilizado principalmente para:",
+    id: "q8",
+    sectionId: "procon",
+    question: "Na API Procon, o que representa uma 'Company'?",
     options: [
-      "Emitir boletos de cobrança",
-      "Acompanhar comunicações oficiais e intimações judiciais",
-      "Criar usuários administrativos",
-      "Gerar token de API",
+      "Um sistema de Procon monitorado",
+      "Uma empresa com CNPJ associada às credenciais",
+      "Um robô de coleta automatizada",
+      "Um tipo de reclamação extrajudicial",
+    ],
+    answerIndex: 1,
+  },
+  {
+    id: "q9",
+    sectionId: "intimacoes",
+    question: "Na API de Intimações, o que pode ser necessário cadastrar dependendo do tribunal?",
+    options: [
+      "Somente token temporário por e-mail",
+      "Certificado digital (PFX em Base64) ou MFA/2FA",
+      "Número CNJ obrigatório em todos os casos",
+      "Senha do usuário da plataforma Jusbrasil",
+    ],
+    answerIndex: 1,
+  },
+  {
+    id: "q10",
+    sectionId: "background-check",
+    question: "Atualmente, o Background Check permite consulta por:",
+    options: [
+      "Somente nome completo",
+      "CPF, CNPJ ou número do processo",
+      "Apenas nome da mãe e data de nascimento",
+      "Somente número CNJ e OAB",
     ],
     answerIndex: 1,
   },
