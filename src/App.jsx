@@ -19,7 +19,7 @@ import ProconBase from "./pages/bases/Procon.jsx";
 import Base4BIZ from "./pages/bases/4biz.jsx";
 import Basecpro from "./pages/bases/cpro.jsx";
 import BaseData_Collection from "./pages/bases/entendendo_data_collection.jsx";
-import BaseOP from "./pages/bases/op.jsx";  
+import BaseOP from "./pages/bases/op.jsx";
 
 // Playbooks
 import Playbook4BIZ from "./pages/bases/playbooks/Playbook4biz.jsx";
@@ -34,6 +34,7 @@ import Videos from "./pages/videos/Videos.jsx";
 import Treinamentos from "./pages/videos/treinamentos.jsx";
 
 // Game
+// import Certificado from "./pages/certificado/certificado.jsx";
 import Quiz from "./pages/certificado/certificado.jsx";
 
 
@@ -62,7 +63,7 @@ export default function App() {
             <Routes>
               {/* Home */}
               <Route path="/" element={<Home />} />
-              
+
               {/* FAQs */}
               <Route path="/faqs/4biz" element={<Faq4BIZ />} />
               <Route path="/faqs/apijs" element={<FaqAPIJS />} />
@@ -92,17 +93,15 @@ export default function App() {
               {/* Vídeos de Treinamento */}
               <Route path="/videos" element={<Videos />} />
               <Route path="/treinamentos" element={<Treinamentos />} />
+            
+              {/* Game */}
+              <Route path="/quiz" element={<Quiz />} />
             </Routes>
 
-            {/* Game */}
-              <Routes>
-            <Route path="/quiz" element={<Quiz />} />
-          </Routes>
-
-        </main>
-      </div>
-    </BrowserRouter>
-  </PasswordGate >
+          </main>
+        </div>
+      </BrowserRouter>
+    </PasswordGate >
   );
 }
 

@@ -18,6 +18,7 @@ export const studyContent = [
       "Nesses cenários, o ideal é verificar token, reduzir chamadas repetidas, aplicar retry com espera e acionar o suporte se o problema persistir.",
     ],
     validator: {
+      required: true,
       buttonLabel: "Concluir conteúdo de API",
       message: "Confirme a leitura do conteúdo de API Jusbrasil Soluções para avançar.",
     },
@@ -43,6 +44,7 @@ export const studyContent = [
       "Se os andamentos do processo não chegaram, deve-se verificar se o monitoramento está ativo em 'Processos monitorados'.",
     ],
     validator: {
+      required: true,
       buttonLabel: "Concluir conteúdo de OP",
       message: "Confirme a leitura do conteúdo de OP para avançar.",
     },
@@ -66,6 +68,7 @@ export const studyContent = [
       "Se a distribuição for posterior à data de cadastro e ainda assim não houver notificação, o suporte deve ser acionado para análise.",
     ],
     validator: {
+      required: true,
       buttonLabel: "Concluir conteúdo de Gestão Avançada",
       message: "Confirme a leitura do conteúdo de Gestão Avançada de Processos para avançar.",
     },
@@ -82,6 +85,7 @@ export const studyContent = [
       "O Jus IA não usa dados dos clientes para treinar modelos externos.",
     ],
     validator: {
+      required: true,
       buttonLabel: "Concluir conteúdo do Hub",
       message: "Confirme a leitura do conteúdo de Hub de Soluções para avançar.",
     },
@@ -106,6 +110,7 @@ export const studyContent = [
       "Na busca por partes, o usuário consegue filtrar por polo ou papel, como ativo, passivo, advogado, juiz ou outros.",
     ],
     validator: {
+      required: true,
       buttonLabel: "Concluir conteúdo de Relatórios",
       message: "Confirme a leitura do conteúdo de Relatórios Avançados para avançar.",
     },
@@ -132,6 +137,7 @@ export const studyContent = [
       "Por padrão, a API foca em CIPs; se o cliente quiser incluir reclamações, deve consultar o suporte.",
     ],
     validator: {
+      required: true,
       buttonLabel: "Concluir conteúdo de Procon",
       message: "Confirme a leitura do conteúdo de Procon para avançar.",
     },
@@ -154,6 +160,7 @@ export const studyContent = [
       "A API pode ser usada de forma síncrona ou assíncrona, inclusive com webhooks para notificações automáticas.",
     ],
     validator: {
+      required: true,
       buttonLabel: "Concluir conteúdo de Intimações",
       message: "Confirme a leitura do conteúdo de Intimações para avançar.",
     },
@@ -169,6 +176,7 @@ export const studyContent = [
       "Se o link ainda não for localizado, o cliente deve entrar em contato com o suporte pelo e-mail suportesolucoes@jusbrasil.com.br.",
     ],
     validator: {
+      required: true,
       buttonLabel: "Concluir conteúdo de Pesquisa Jurídica",
       message: "Confirme a leitura do conteúdo de Pesquisa Jurídica para avançar.",
     },
@@ -192,6 +200,7 @@ export const studyContent = [
       "Para validar suspeita de homônimo, é possível usar a confiança do processo e, se ainda houver dúvida, encaminhar o caso para suportesolucoes@jusbrasil.com.br com nome da mãe, data de nascimento, nome consultado, CPF e número do processo.",
     ],
     validator: {
+      required: true,
       buttonLabel: "Concluir conteúdo de Background Check",
       message: "Confirme a leitura do conteúdo de Background Check para finalizar a trilha.",
     },
