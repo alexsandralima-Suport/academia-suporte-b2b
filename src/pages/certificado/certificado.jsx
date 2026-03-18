@@ -180,7 +180,7 @@ export default function Quiz() {
 
       doc.setFont("helvetica", "bold");
       doc.setFontSize(22);
-      doc.text("é Apioador (a) do Suporte B2B", W / 2, yAfterName, {
+      doc.text("é Apoiador (a) do Suporte B2B", W / 2, yAfterName, {
         align: "center",
       });
 
@@ -217,7 +217,7 @@ export default function Quiz() {
       });
 
       try {
-        const selo = await loadImageAsDataURL("/img/selo_novo.19");
+        const selo = await loadImageAsDataURL("/img/selo_novo2.15");
 
         const img = new Image();
         img.src = selo;
