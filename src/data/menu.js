@@ -43,9 +43,9 @@ export const menu = [
   },
 
   {
-    title: "Game (em desenvolvimento)",
+    title: "Game (developing)",
     items: [
-      { label: "Quiz", path: "/quiz" }
+      { label: "Learning trail", path: "/quiz" }
     ]
   },
 
