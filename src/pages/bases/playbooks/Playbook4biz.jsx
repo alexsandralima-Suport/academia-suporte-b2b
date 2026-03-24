@@ -36,7 +36,7 @@ export default function Base4BIZ() {
       <h3>1.2 Limite de consultas por CPF ou CNPJ atingido</h3>
       <ul>
         <li>
-          Existe um limite mensal de <strong>100 consultas</strong> por CPF/CNPJ
+          Existe um limite mensal de <strong> 30 consultas</strong> por CPF/CNPJ
           por organização.
         </li>
         <li>
