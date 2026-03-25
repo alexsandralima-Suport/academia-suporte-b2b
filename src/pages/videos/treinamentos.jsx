@@ -615,15 +615,39 @@ export default function Videos() {
           </a>
         </div>
 
-
-
-
-
-
-
-
-
+      <div style={pageStyles.materialCard}>
+        <h3 style={pageStyles.materialTitle}>
+          24.
+          Treinamento | 4BIZ Troca do usuário admin
+        </h3>
+        <p>
+          Treinamento sobre a troca do usuário administrador no produto 4biz
+        </p>
+        <a
+          href="https://drive.google.com/file/d/1wliqSm58uDUJyvux1IJGxWhWm-gO-FCi/view?usp=sharing"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={pageStyles.materialLink}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = "#004033";
+            e.currentTarget.style.color = "#ffffff";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = "transparent";
+            e.currentTarget.style.color = "#004033";
+          }}
+        >
+          Acessar Treinamento →
+        </a>
       </div>
+
+
+
+
+
+
+
     </div>
+    </div >
   );
 }
