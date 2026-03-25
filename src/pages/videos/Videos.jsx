@@ -87,9 +87,9 @@ export default function Videos() {
           </a>
         </div>
 
-          <div style={pageStyles.materialCard}>
+        <div style={pageStyles.materialCard}>
           <h3 style={pageStyles.materialTitle}>
-            3. Monitoramento de andamentos 
+            3. Monitoramento de andamentos
           </h3>
           <p>
             Material de apoio sobre monitoramento de andamentos.
@@ -113,7 +113,7 @@ export default function Videos() {
         </div>
 
 
-          <div style={pageStyles.materialCard}>
+        <div style={pageStyles.materialCard}>
           <h3 style={pageStyles.materialTitle}>
             4. Treinamentos de Suporte - Debug
           </h3>
@@ -138,7 +138,7 @@ export default function Videos() {
           </a>
         </div>
 
-           <div style={pageStyles.materialCard}>
+        <div style={pageStyles.materialCard}>
           <h3 style={pageStyles.materialTitle}>
             5. Diários Oficiais
           </h3>
@@ -163,7 +163,7 @@ export default function Videos() {
           </a>
         </div>
 
-         <div style={pageStyles.materialCard}>
+        <div style={pageStyles.materialCard}>
           <h3 style={pageStyles.materialTitle}>
             6. Recortes por termo
           </h3>
@@ -188,9 +188,9 @@ export default function Videos() {
           </a>
         </div>
 
-  <div style={pageStyles.materialCard}>
+        <div style={pageStyles.materialCard}>
           <h3 style={pageStyles.materialTitle}>
-            7. Segredo de justiça 
+            7. Segredo de justiça
           </h3>
           <p>
             Material de apoio sobre segredo de justiça.
@@ -215,7 +215,7 @@ export default function Videos() {
 
         <div style={pageStyles.materialCard}>
           <h3 style={pageStyles.materialTitle}>
-          8. Procon
+            8. Procon
           </h3>
           <p>
             Material de apoio sobre procon.
@@ -238,10 +238,10 @@ export default function Videos() {
           </a>
         </div>
 
-        
+
         <div style={pageStyles.materialCard}>
           <h3 style={pageStyles.materialTitle}>
-          9. CPRO 
+            9. CPRO
           </h3>
           <p>
             Material de apoio sobre CPRO.
@@ -263,10 +263,10 @@ export default function Videos() {
             Acessar Material →
           </a>
         </div>
- 
+
         <div style={pageStyles.materialCard}>
           <h3 style={pageStyles.materialTitle}>
-          10. Pocesso criminal maio-2025 
+            10. Pocesso criminal maio-2025
           </h3>
           <p>
             Material de apoio sobre processo criminal.
@@ -289,9 +289,9 @@ export default function Videos() {
           </a>
         </div>
 
-          <div style={pageStyles.materialCard}>
+        <div style={pageStyles.materialCard}>
           <h3 style={pageStyles.materialTitle}>
-         11. Estrutura do OP + Relatórios
+            11. Estrutura do OP + Relatórios
           </h3>
           <p>
             Material de apoio sobre estrutura do OP e relatórios.
@@ -316,7 +316,7 @@ export default function Videos() {
 
         <div style={pageStyles.materialCard}>
           <h3 style={pageStyles.materialTitle}>
-         12. Base de dados
+            12. Base de dados
           </h3>
           <p>
             Material de apoio sobre estrutura do OP e relatórios.
@@ -338,6 +338,32 @@ export default function Videos() {
             Acessar Material →
           </a>
         </div>
+
+        <div style={pageStyles.materialCard}>
+          <h3 style={pageStyles.materialTitle}>
+            13. 4biz - Troca do usuário admin 
+          </h3>
+          <p>
+            Material de apoio sobre a troca do usuário admin.
+          </p>
+          <a
+            href="https://docs.google.com/document/d/1Ga0_223Wu1czUY3N5zxjLRt6_yHvLc4Sw-GweCI8e5A/edit?tab=t.0#heading=h.e4pxgrmni4z8"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={pageStyles.materialLink}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = "#004033";
+              e.currentTarget.style.color = "#ffffff";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = "transparent";
+              e.currentTarget.style.color = "#004033";
+            }}
+          >
+            Acessar Material →
+          </a>
+        </div>
+
 
       </div>
     </div>
