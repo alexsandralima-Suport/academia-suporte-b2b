@@ -25,8 +25,8 @@ export default function FaqHS() {
       </ul>
 
       <p>
-        <strong>Link de acesso:</strong>{" "}
-        <em>(adicione aqui o link oficial do Hub Soluções)</em>
+        <strong>Link de acesso: https://hub.jusbrasil.com.br/</strong>{" "}
+        
       </p>
 
       <h3>O Jus IA usa meus dados para treinar modelos externos?</h3>

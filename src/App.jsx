@@ -20,6 +20,8 @@ import Base4BIZ from "./pages/bases/4biz.jsx";
 import Basecpro from "./pages/bases/cpro.jsx";
 import BaseData_Collection from "./pages/bases/entendendo_data_collection.jsx";
 import BaseOP from "./pages/bases/op.jsx";
+import Baseonboarding from "./pages/bases/onboarding.jsx";
+import Baselinks_uteis from "./pages/bases/links_uteis.jsx";
 
 // Playbooks
 import Playbook4BIZ from "./pages/bases/playbooks/Playbook4biz.jsx";
@@ -81,6 +83,9 @@ export default function App() {
               <Route path="/bases/cpro" element={<Basecpro />} />
               <Route path="/bases/entendendo_data_collection" element={<BaseData_Collection />} />
               <Route path="/bases/op" element={<BaseOP />} />
+              <Route path="/bases/onboarding" element={<Baseonboarding />} />
+              <Route path="/bases/links_uteis" element={<Baselinks_uteis />} />
+
 
               {/* Playbooks */}
               <Route path="/playbooks/4biz" element={<Playbook4BIZ />} />
