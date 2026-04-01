@@ -22,7 +22,7 @@ export const menu = [
       { label: "Entendendo Data Collection", path: "/bases/entendendo_data_collection" },
       { label: "OP", path: "/bases/op" },
       { label: "Links Úteis", path: "/bases/links_uteis" },
-      { label: "Onboarding", path: "/bases/onboarding" },
+      { label: "Onboarding B2B Support", path: "/bases/onboarding" },
       { label: "Scripts", path: "/bases/scripts" },
     ]
   },
