@@ -242,7 +242,7 @@ export default function OnboardingSuporteB2B() {
 
         <p>
           Os canais abaixo são utilizados para comunicação interna e
-          escalonamento de problemas.
+          escalonamentos.
         </p>
 
         <div style={styles.grid2}>
@@ -303,6 +303,58 @@ export default function OnboardingSuporteB2B() {
           <li>Revise antes de enviar</li>
           <li>Documente tudo (comentário interno no ticket)</li>
         </ul>
+
+        {/* TREINAMENTOS */}
+<section style={styles.section}>
+  <h2 style={styles.sectionTitle}>9) Treinamentos</h2>
+
+  <p>
+    Para aprofundar seus conhecimentos e evoluir no atendimento, disponibilizamos
+    uma trilha de treinamentos com conteúdos práticos sobre ferramentas,
+    produtos e cenários reais do suporte B2B.
+  </p>
+
+  <p>
+    Os treinamentos são essenciais para ganhar autonomia, melhorar a qualidade
+    das análises e reduzir a necessidade de escalonamentos.
+  </p>
+
+  <div style={styles.grid2}>
+    <div style={styles.card}>
+      <h3 style={styles.cardTitle}>📚 O que você vai encontrar</h3>
+      <ul style={styles.list}>
+        <li>Treinamentos de produtos</li>
+        <li>Entendimento sobre as regras de negócio</li>
+        <li>Boas práticas de investigação</li>
+        <li>Fluxos operacionais do time</li>
+      </ul>
+    </div>
+
+    <div style={styles.card}>
+      <h3 style={styles.cardTitle}>🚀 Acesse a trilha de treinamentos</h3>
+
+      <p>
+        Clique abaixo para acessar todos os conteúdos disponíveis:
+      </p>
+
+      <a
+        href="https://academia-suporte-b2b.vercel.app/treinamentos"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          display: "inline-block",
+          marginTop: "10px",
+          fontWeight: "600",
+          color: "#004033",
+          textDecoration: "underline"
+        }}
+      >
+        Acessar treinamentos
+      </a>
+    </div>
+  </div>
+
+</section>
 
         <div style={styles.callout}>
           Séneca - Enquanto vivemos, devemos continuar aprendendo.
