@@ -22,6 +22,7 @@ import BaseData_Collection from "./pages/bases/entendendo_data_collection.jsx";
 import BaseOP from "./pages/bases/op.jsx";
 import Baseonboarding from "./pages/bases/onboarding.jsx";
 import Baselinks_uteis from "./pages/bases/links_uteis.jsx";
+import Basescripts from "./pages/bases/scripts.jsx";
 
 // Playbooks
 import Playbook4BIZ from "./pages/bases/playbooks/Playbook4biz.jsx";
@@ -85,6 +86,7 @@ export default function App() {
               <Route path="/bases/op" element={<BaseOP />} />
               <Route path="/bases/onboarding" element={<Baseonboarding />} />
               <Route path="/bases/links_uteis" element={<Baselinks_uteis />} />
+              <Route path="/bases/scripts" element={<Basescripts />} />
 
 
               {/* Playbooks */}
