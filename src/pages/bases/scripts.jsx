@@ -76,7 +76,7 @@ const scriptsData = [
     descricao: "Esse script tem o objetivo de extrair as variações das partes monitoradas.",
   },
   {
-    titulo: "Extrair dados dos usuários",
+    titulo: "Extrair dados dos usuários | Alteração do e-mail em massa ",
     categoria: "Relatórios",
     link: "https://colab.research.google.com/drive/1WottbuP3MLXJp0ebYjZVZQhB-iFUr177",
     descricao: "Esse script foi criado para um chamado em específico com a funcionalidade de exportar todos os usuários cadastrados para determinadas empresas.",
