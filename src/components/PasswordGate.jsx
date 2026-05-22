@@ -1,16 +1,35 @@
 import { useState } from "react";
 
 const PASSWORD = import.meta.env.VITE_SITE_PASSWORD || "1234";
+const STORAGE_KEY = "academia-b2b-auth";
+const EXPIRY_DAYS = 7;
+
+function saveSession() {
+  const expiresAt = Date.now() + EXPIRY_DAYS * 24 * 60 * 60 * 1000;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({ hash: btoa(PASSWORD), expiresAt }));
+}
+
+function isSessionValid() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return false;
+    const { hash, expiresAt } = JSON.parse(raw);
+    return hash === btoa(PASSWORD) && Date.now() < expiresAt;
+  } catch {
+    return false;
+  }
+}
 
 export default function PasswordGate({ children }) {
   const [input, setInput] = useState("");
-  const [authorized, setAuthorized] = useState(false);
+  const [authorized, setAuthorized] = useState(() => isSessionValid());
   const [error, setError] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
 
     if (input === PASSWORD) {
+      saveSession();
       setAuthorized(true);
       setError(false);
     } else {

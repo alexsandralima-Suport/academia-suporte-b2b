@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { jsPDF } from "jspdf";
 import { questions } from "../../data/questions";
 import { studyContent } from "../../data/studyContent";
@@ -31,15 +31,24 @@ export default function Quiz() {
   const total = questions.length;
   const totalStudyItems = studyContent.length;
 
-  const [step, setStep] = useState("study"); // "study" | "quiz" | "result" | "certificate"
-  const [current, setCurrent] = useState(0);
-  const [answers, setAnswers] = useState(Array(total).fill(null));
+  // Lê o progresso salvo no localStorage ao iniciar
+  const saved = useMemo(() => {
+    try {
+      return JSON.parse(localStorage.getItem("academia-b2b-progress") || "{}");
+    } catch {
+      return {};
+    }
+  }, []);
+
+  const [step, setStep] = useState(saved.step || "study"); // "study" | "quiz" | "result" | "certificate"
+  const [current, setCurrent] = useState(saved.current ?? 0);
+  const [answers, setAnswers] = useState(saved.answers || Array(total).fill(null));
   const [name, setName] = useState("");
   const [showFeedback, setShowFeedback] = useState(false);
 
   // controle da trilha
-  const [currentStudyIndex, setCurrentStudyIndex] = useState(0);
-  const [completedContentIds, setCompletedContentIds] = useState([]);
+  const [currentStudyIndex, setCurrentStudyIndex] = useState(saved.currentStudyIndex ?? 0);
+  const [completedContentIds, setCompletedContentIds] = useState(saved.completedContentIds || []);
 
   const correctCount = useMemo(() => {
     return answers.reduce((acc, chosen, idx) => {
@@ -56,6 +65,14 @@ export default function Quiz() {
   const passed = percentage >= 70;
   const allStudyCompleted = completedContentIds.length === totalStudyItems;
   const currentStudyItem = studyContent[currentStudyIndex];
+
+  // Salva o progresso no localStorage sempre que o estado relevante mudar
+  useEffect(() => {
+    localStorage.setItem(
+      "academia-b2b-progress",
+      JSON.stringify({ step, current, answers, currentStudyIndex, completedContentIds })
+    );
+  }, [step, current, answers, currentStudyIndex, completedContentIds]);
 
   function selectOption(optionIndex) {
     const copy = [...answers];
@@ -103,6 +120,7 @@ export default function Quiz() {
   }
 
   function reset() {
+    localStorage.removeItem("academia-b2b-progress");
     setStep("study");
     setCurrent(0);
     setAnswers(Array(total).fill(null));
@@ -260,158 +278,194 @@ export default function Quiz() {
     const isLastStudyItem = currentStudyIndex === totalStudyItems - 1;
 
     return (
-      <div style={{ maxWidth: 820, margin: "40px auto", fontFamily: "Arial" }}>
-        <h2>📚 Material de leitura</h2>
-        <p style={{ color: "#555" }}>
-          Leia cada conteúdo e valide a conclusão. O quiz será liberado
-          após a conclusão de toda a trilha.
+      <div style={{ maxWidth: 900, margin: "40px auto", fontFamily: "Arial" }}>
+
+        {/* Cabeçalho */}
+        <h2 style={{ margin: "0 0 4px 0", color: "#004033" }}>📚 Trilha de Aprendizado</h2>
+        <p style={{ color: "#666", marginTop: 4, marginBottom: 20 }}>
+          Leia cada módulo e conclua para avançar. O quiz é liberado ao terminar toda a trilha.
         </p>
 
-        <div style={{ margin: "10px 0 20px 0" }}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              fontSize: 12,
-              color: "#555",
-            }}
-          >
-            <span>Progresso da trilha</span>
-            <span>
-              {completedCount}/{totalStudyItems} concluídos
-            </span>
+        {/* Barra de progresso geral */}
+        <div style={{ marginBottom: 28 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", fontSize: 12, color: "#777", marginBottom: 6 }}>
+            <span>Progresso geral</span>
+            <span>{completedCount} de {totalStudyItems} módulos concluídos</span>
           </div>
-
-          <div
-            style={{
-              height: 10,
-              background: "#e6eaef",
-              borderRadius: 999,
-              overflow: "hidden",
-              marginTop: 6,
-            }}
-          >
-            <div
-              style={{
-                height: "100%",
-                width: `${progressPct}%`,
-                background: "#004033",
-                borderRadius: 999,
-                transition: "width 250ms ease",
-              }}
-            />
+          <div style={{ height: 8, background: "#e6eaef", borderRadius: 999, overflow: "hidden" }}>
+            <div style={{ height: "100%", width: `${progressPct}%`, background: "#004033", borderRadius: 999, transition: "width 300ms ease" }} />
           </div>
         </div>
 
-        {!allStudyCompleted && currentStudyItem && (
-          <div
-            style={{
-              background: "#fff",
-              border: "1px solid #ddd",
-              borderRadius: 12,
-              padding: 16,
-            }}
-          >
-            <p style={{ marginTop: 0, color: "#777", fontSize: 14 }}>
-              Conteúdo {currentStudyIndex + 1} de {totalStudyItems}
+        {/* Layout em duas colunas: navegador + conteúdo */}
+        <div style={{ display: "flex", gap: 24, alignItems: "flex-start" }}>
+
+          {/* Coluna esquerda: navegador de módulos */}
+          <div style={{
+            minWidth: 220,
+            maxWidth: 240,
+            background: "#f6f8fa",
+            border: "1px solid #e0e6ed",
+            borderRadius: 14,
+            padding: "16px 12px",
+            flexShrink: 0,
+          }}>
+            <p style={{ margin: "0 0 12px 4px", fontSize: 11, fontWeight: "bold", color: "#888", textTransform: "uppercase", letterSpacing: 1 }}>
+              Módulos
             </p>
+            <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+              {studyContent.map((item, idx) => {
+                const isCompleted = completedContentIds.includes(item.id);
+                const isCurrent = currentStudyIndex === idx && !allStudyCompleted;
+                const isAccessible = isCompleted || idx <= currentStudyIndex;
 
-            <h3 style={{ margin: "0 0 8px 0", color: "#004033" }}>
-              {currentStudyItem.title}
-            </h3>
-
-            <ul style={{ margin: 0, paddingLeft: 18 }}>
-              {currentStudyItem.bullets.map((b, i) => (
-                <li key={i} style={{ marginBottom: 8 }}>
-                  {b}
-                </li>
-              ))}
-            </ul>
-
-            <div
-              style={{
-                marginTop: 16,
-                padding: 12,
-                background: "#f6f8fa",
-                borderRadius: 10,
-                color: "#555",
-                fontSize: 14,
-              }}
-            >
-              {currentStudyItem.validator?.message}
-            </div>
-
-            <div style={{ marginTop: 20, display: "flex", gap: 10, flexWrap: "wrap" }}>
-              <button
-                onClick={goToPreviousStudyItem}
-                disabled={currentStudyIndex === 0}
-              >
-                Voltar conteúdo
-              </button>
-
-              <button
-                onClick={completeCurrentContent}
-                style={{
-                  background: "#004033",
-                  color: "white",
-                  border: "none",
-                  padding: "10px 14px",
-                  borderRadius: 10,
-                  cursor: "pointer",
-                }}
-              >
-                {currentStudyItem.validator?.buttonLabel ||
-                  (isLastStudyItem ? "Concluir trilha" : "Concluir conteúdo")}
-              </button>
-
-              <button onClick={reset} style={{ opacity: 0.85 }}>
-                Reiniciar
-              </button>
+                return (
+                  <div
+                    key={item.id}
+                    onClick={() => isAccessible && setCurrentStudyIndex(idx)}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 10,
+                      padding: "8px 10px",
+                      borderRadius: 8,
+                      cursor: isAccessible ? "pointer" : "default",
+                      background: isCurrent ? "#004033" : "transparent",
+                      transition: "background 150ms",
+                    }}
+                  >
+                    <span style={{ fontSize: 14, minWidth: 18, textAlign: "center" }}>
+                      {isCompleted ? "✅" : isCurrent ? "▶" : "○"}
+                    </span>
+                    <span style={{
+                      fontSize: 13,
+                      color: isCurrent ? "#ffffff" : isCompleted ? "#004033" : "#aaa",
+                      fontWeight: isCurrent || isCompleted ? "600" : "normal",
+                      lineHeight: 1.3,
+                    }}>
+                      {item.title}
+                    </span>
+                  </div>
+                );
+              })}
             </div>
           </div>
-        )}
 
-        {allStudyCompleted && (
-          <div
-            style={{
-              background: "#eef8f3",
-              border: "1px solid #c7e8d5",
-              borderRadius: 12,
-              padding: 18,
-            }}
-          >
-            <h3 style={{ marginTop: 0, color: "#004033" }}>
-              ✅ Trilha concluída
-            </h3>
-            <p style={{ color: "#355", marginBottom: 16 }}>
-              Todos os materiais foram concluídos com sucesso. O quiz foi
-              liberado.
-            </p>
+          {/* Coluna direita: conteúdo atual ou tela de conclusão */}
+          <div style={{ flex: 1, minWidth: 0 }}>
 
-            <div style={{ display: "flex", gap: 10 }}>
-              <button
-                onClick={() => {
-                  setCurrent(0);
-                  setStep("quiz");
-                }}
-                style={{
-                  background: "#004033",
-                  color: "white",
-                  border: "none",
-                  padding: "10px 14px",
-                  borderRadius: 10,
-                  cursor: "pointer",
-                }}
-              >
-                Começar quiz
-              </button>
+            {!allStudyCompleted && currentStudyItem && (
+              <div style={{ background: "#fff", border: "1px solid #ddd", borderRadius: 14, overflow: "hidden" }}>
 
-              <button onClick={reset} style={{ opacity: 0.85 }}>
-                Reiniciar
-              </button>
-            </div>
+                {/* Cabeçalho verde com título */}
+                <div style={{
+                  background: "linear-gradient(135deg, #004033 0%, #006b52 100%)",
+                  padding: "20px 28px 22px",
+                }}>
+                  <span style={{
+                    display: "inline-block",
+                    fontSize: 10,
+                    fontWeight: "bold",
+                    color: "#a8d8c8",
+                    background: "rgba(255,255,255,0.12)",
+                    borderRadius: 20,
+                    padding: "2px 10px",
+                    marginBottom: 10,
+                    textTransform: "uppercase",
+                    letterSpacing: 1,
+                  }}>
+                    Módulo {currentStudyIndex + 1} de {totalStudyItems}
+                  </span>
+                  <h3 style={{ margin: 0, color: "#ffffff", fontSize: 21, fontWeight: "700", lineHeight: 1.3 }}>
+                    {currentStudyItem.title}
+                  </h3>
+                </div>
+
+                {/* Corpo em texto corrido */}
+                <div style={{ padding: "28px 28px 8px" }}>
+
+                  {/* Parágrafo de abertura — destaque */}
+                  <p style={{
+                    fontSize: 15,
+                    lineHeight: 1.85,
+                    color: "#1a1a1a",
+                    fontWeight: "500",
+                    borderLeft: "3px solid #004033",
+                    paddingLeft: 16,
+                    margin: "0 0 20px 0",
+                  }}>
+                    {currentStudyItem.bullets[0]}
+                  </p>
+
+                  {/* Demais parágrafos separados por ornamento */}
+                  {currentStudyItem.bullets.slice(1).map((b, i) => (
+                    <div key={i}>
+                      <div style={{ textAlign: "center", color: "#c5d4cc", fontSize: 16, margin: "6px 0 14px", letterSpacing: 6 }}>
+                        · · ·
+                      </div>
+                      <p style={{
+                        fontSize: 14,
+                        lineHeight: 1.9,
+                        color: "#3a3a3a",
+                        margin: "0 0 6px 0",
+                      }}>
+                        {b}
+                      </p>
+                    </div>
+                  ))}
+
+                </div>
+
+                {/* Mensagem de confirmação */}
+                <div style={{ margin: "20px 28px 0", padding: "12px 16px", background: "#f0f3f7", borderRadius: 10, color: "#555", fontSize: 13, borderLeft: "4px solid #004033" }}>
+                  {currentStudyItem.validator?.message}
+                </div>
+
+                {/* Botões */}
+                <div style={{ margin: "20px 28px 24px", display: "flex", gap: 10, flexWrap: "wrap" }}>
+                  <button
+                    onClick={goToPreviousStudyItem}
+                    disabled={currentStudyIndex === 0}
+                    style={{ padding: "9px 16px", borderRadius: 8, border: "1px solid #ccc", background: "#fff", cursor: currentStudyIndex === 0 ? "default" : "pointer", opacity: currentStudyIndex === 0 ? 0.4 : 1 }}
+                  >
+                    ← Anterior
+                  </button>
+                  <button
+                    onClick={completeCurrentContent}
+                    style={{ background: "#004033", color: "white", border: "none", padding: "9px 20px", borderRadius: 8, cursor: "pointer", fontWeight: "bold" }}
+                  >
+                    {currentStudyItem.validator?.buttonLabel || (isLastStudyItem ? "Concluir trilha ✓" : "Concluir e avançar →")}
+                  </button>
+                  <button onClick={reset} style={{ padding: "9px 14px", borderRadius: 8, border: "1px solid #ccc", background: "#fff", cursor: "pointer", opacity: 0.6 }}>
+                    Reiniciar
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {allStudyCompleted && (
+              <div style={{ background: "#eef8f3", border: "1px solid #b3d9cc", borderRadius: 14, padding: "36px 28px", textAlign: "center" }}>
+                <div style={{ fontSize: 48, marginBottom: 12 }}>🎉</div>
+                <h3 style={{ margin: "0 0 8px 0", color: "#004033", fontSize: 22 }}>Trilha concluída!</h3>
+                <p style={{ color: "#446655", marginBottom: 24, fontSize: 15 }}>
+                  Você completou os {totalStudyItems} módulos. O quiz está liberado.
+                </p>
+                <div style={{ display: "flex", gap: 12, justifyContent: "center" }}>
+                  <button
+                    onClick={() => { setCurrent(0); setStep("quiz"); }}
+                    style={{ background: "#004033", color: "white", border: "none", padding: "12px 28px", borderRadius: 10, cursor: "pointer", fontWeight: "bold", fontSize: 15 }}
+                  >
+                    Iniciar Quiz →
+                  </button>
+                  <button onClick={reset} style={{ padding: "12px 20px", borderRadius: 10, border: "1px solid #ccc", background: "#fff", cursor: "pointer", opacity: 0.7 }}>
+                    Reiniciar trilha
+                  </button>
+                </div>
+              </div>
+            )}
+
           </div>
-        )}
+        </div>
       </div>
     );
   }
