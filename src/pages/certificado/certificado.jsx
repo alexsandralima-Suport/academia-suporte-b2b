@@ -27,6 +27,18 @@ function loadImageAsDataURL(src) {
   });
 }
 
+const APPS_SCRIPT_URL = import.meta.env.VITE_APPS_SCRIPT_URL || "";
+
+function registrarCertificado(nome, aproveitamento) {
+  if (!APPS_SCRIPT_URL) return;
+  fetch(APPS_SCRIPT_URL, {
+    method: "POST",
+    mode: "no-cors",
+    headers: { "Content-Type": "text/plain" },
+    body: JSON.stringify({ nome, aproveitamento }),
+  }).catch(() => {}); // falha silenciosa — não bloqueia o download do PDF
+}
+
 export default function Quiz() {
   const total = questions.length;
   const totalStudyItems = studyContent.length;
@@ -262,6 +274,7 @@ export default function Quiz() {
       }
 
       doc.save(`certificado-${safeName.replace(/\s+/g, "-").toLowerCase()}.pdf`);
+      registrarCertificado(safeName, percentage);
     } catch (err) {
       console.error("Erro ao gerar certificado:", err);
       alert("Erro ao gerar certificado. Veja o console (F12).");

@@ -39,6 +39,7 @@ import Treinamentos from "./pages/videos/treinamentos.jsx";
 // Game
 // import Certificado from "./pages/certificado/certificado.jsx";
 import Quiz from "./pages/certificado/certificado.jsx";
+import Ranking from "./pages/ranking/Ranking.jsx";
 
 
 export default function App() {
@@ -103,6 +104,7 @@ export default function App() {
             
               {/* Game */}
               <Route path="/quiz" element={<Quiz />} />
+              <Route path="/ranking" element={<Ranking />} />
             </Routes>
 
           </main>

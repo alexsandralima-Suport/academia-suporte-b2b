@@ -48,7 +48,8 @@ export const menu = [
   {
     title: "Game (developing)",
     items: [
-      { label: "Learning trail", path: "/quiz" }
+      { label: "Learning trail", path: "/quiz" },
+      { label: "🏆 Ranking", path: "/ranking" }
     ]
   },
 
