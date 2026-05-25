@@ -27,14 +27,10 @@ function loadImageAsDataURL(src) {
   });
 }
 
-const APPS_SCRIPT_URL = import.meta.env.VITE_APPS_SCRIPT_URL || "";
-
 function registrarCertificado(nome, aproveitamento) {
-  if (!APPS_SCRIPT_URL) return;
-  fetch(APPS_SCRIPT_URL, {
+  fetch("/api/registro", {
     method: "POST",
-    mode: "no-cors",
-    headers: { "Content-Type": "text/plain" },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ nome, aproveitamento }),
   }).catch(() => {}); // falha silenciosa — não bloqueia o download do PDF
 }

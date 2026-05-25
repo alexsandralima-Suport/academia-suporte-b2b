@@ -1,27 +1,6 @@
 import { useEffect, useState } from "react";
 
-const SHEET_ID   = import.meta.env.VITE_SHEET_ID || "";
-const SHEET_NAME = "Certificados";
-const MEDALS     = ["🥇", "🥈", "🥉"];
-
-function buildGvizUrl(sheetId, sheetName) {
-  return `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheetName)}`;
-}
-
-function parseGviz(text) {
-  // A resposta vem no formato: /*O_o*/\ngoogle.visualization.Query.setResponse({...});
-  const match = text.match(/google\.visualization\.Query\.setResponse\(([\s\S]+)\)/);
-  if (!match) return [];
-  const parsed = JSON.parse(match[1]);
-  if (!parsed?.table?.rows?.length) return [];
-
-  const cols = parsed.table.cols.map(c => c.label);
-  return parsed.table.rows.map(row => {
-    const obj = {};
-    row.c?.forEach((cell, i) => { obj[cols[i]] = cell?.v ?? ""; });
-    return obj;
-  });
-}
+const MEDALS = ["🥇", "🥈", "🥉"];
 
 export default function Ranking() {
   const [ranking, setRanking] = useState([]);
@@ -29,13 +8,11 @@ export default function Ranking() {
   const [erro,    setErro]    = useState(false);
 
   useEffect(() => {
-    if (!SHEET_ID) { setLoading(false); return; }
-
-    fetch(buildGvizUrl(SHEET_ID, SHEET_NAME))
-      .then(r => r.text())
-      .then(text => {
-        const rows = parseGviz(text);
-        const sorted = rows.sort(
+    fetch("/api/ranking")
+      .then(r => r.json())
+      .then(data => {
+        if (data.error) throw new Error(data.error);
+        const sorted = [...data].sort(
           (a, b) => Number(b["Aproveitamento (%)"]) - Number(a["Aproveitamento (%)"])
         );
         setRanking(sorted);
@@ -59,12 +36,6 @@ export default function Ranking() {
     </div>
   );
 
-  if (!SHEET_ID) return (
-    <div style={{ padding: 60, textAlign: "center", fontFamily: "Arial", color: "#aaa" }}>
-      <div style={{ fontSize: 36, marginBottom: 12 }}>🔧</div>
-      Ranking não configurado.
-    </div>
-  );
 
   /* ── pódio: exibe na ordem visual 2º | 1º | 3º ── */
   const top3        = ranking.slice(0, 3);
