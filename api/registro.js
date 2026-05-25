@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: "GitHub não configurado" });
   }
 
-  const { nome, aproveitamento } = req.body;
+  const { nome, aproveitamento, tempo } = req.body;
   if (!nome) return res.status(400).json({ error: "Nome obrigatório" });
 
   const FILE_PATH = "public/data/certificados.csv";
@@ -32,7 +32,7 @@ export default async function handler(req, res) {
     // 2. Monta a nova linha (usa | como separador para evitar conflito com vírgulas em nomes)
     const now  = new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
     const [date, time] = now.split(", ");
-    const newRow = `${nome}|${aproveitamento}|${date}|${time}\n`;
+    const newRow = `${nome}|${aproveitamento}|${tempo ?? 0}|${date}|${time}\n`;
 
     // 3. Commita o arquivo atualizado
     const newContent = existingContent + newRow;

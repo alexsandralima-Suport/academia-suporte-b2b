@@ -27,12 +27,18 @@ function loadImageAsDataURL(src) {
   });
 }
 
-function registrarCertificado(nome, aproveitamento) {
+function registrarCertificado(nome, aproveitamento, tempo) {
   fetch("/api/registro", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ nome, aproveitamento }),
-  }).catch(() => {}); // falha silenciosa — não bloqueia o download do PDF
+    body: JSON.stringify({ nome, aproveitamento, tempo }),
+  }).catch(() => {});
+}
+
+function formatTime(seconds) {
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  return `${m}:${String(s).padStart(2, "0")}`;
 }
 
 export default function Quiz() {
@@ -48,7 +54,7 @@ export default function Quiz() {
     }
   }, []);
 
-  const [step, setStep] = useState(saved.step || "study"); // "study" | "quiz" | "result" | "certificate"
+  const [step, setStep] = useState(saved.step || "study");
   const [current, setCurrent] = useState(saved.current ?? 0);
   const [answers, setAnswers] = useState(saved.answers || Array(total).fill(null));
   const [name, setName] = useState("");
@@ -57,6 +63,17 @@ export default function Quiz() {
   // controle da trilha
   const [currentStudyIndex, setCurrentStudyIndex] = useState(saved.currentStudyIndex ?? 0);
   const [completedContentIds, setCompletedContentIds] = useState(saved.completedContentIds || []);
+
+  // cronômetro
+  const [quizStartTime, setQuizStartTime] = useState(saved.quizStartTime || null);
+  const [finalTime, setFinalTime]         = useState(saved.finalTime ?? 0);
+  const [timerSeconds, setTimerSeconds]   = useState(0);
+
+  // tentativa única — lê do localStorage separado
+  const [quizCompleted, setQuizCompleted] = useState(() => {
+    try { return JSON.parse(localStorage.getItem("academia-b2b-completed") || "null"); }
+    catch { return null; }
+  });
 
   const correctCount = useMemo(() => {
     return answers.reduce((acc, chosen, idx) => {
@@ -78,9 +95,18 @@ export default function Quiz() {
   useEffect(() => {
     localStorage.setItem(
       "academia-b2b-progress",
-      JSON.stringify({ step, current, answers, currentStudyIndex, completedContentIds })
+      JSON.stringify({ step, current, answers, currentStudyIndex, completedContentIds, quizStartTime, finalTime })
     );
-  }, [step, current, answers, currentStudyIndex, completedContentIds]);
+  }, [step, current, answers, currentStudyIndex, completedContentIds, quizStartTime, finalTime]);
+
+  // Cronômetro — roda só durante o quiz
+  useEffect(() => {
+    if (step !== "quiz" || !quizStartTime) return;
+    const id = setInterval(() => {
+      setTimerSeconds(Math.floor((Date.now() - quizStartTime) / 1000));
+    }, 1000);
+    return () => clearInterval(id);
+  }, [step, quizStartTime]);
 
   function selectOption(optionIndex) {
     const copy = [...answers];
@@ -96,8 +122,13 @@ export default function Quiz() {
 
     setShowFeedback(false);
 
-    if (current < total - 1) setCurrent((c) => c + 1);
-    else setStep("result");
+    if (current < total - 1) {
+      setCurrent((c) => c + 1);
+    } else {
+      const elapsed = quizStartTime ? Math.floor((Date.now() - quizStartTime) / 1000) : 0;
+      setFinalTime(elapsed);
+      setStep("result");
+    }
   }
 
   function back() {
@@ -136,6 +167,9 @@ export default function Quiz() {
     setShowFeedback(false);
     setCurrentStudyIndex(0);
     setCompletedContentIds([]);
+    setQuizStartTime(null);
+    setFinalTime(0);
+    setTimerSeconds(0);
   }
 
   async function generateCertificatePDF() {
@@ -270,7 +304,10 @@ export default function Quiz() {
       }
 
       doc.save(`certificado-${safeName.replace(/\s+/g, "-").toLowerCase()}.pdf`);
-      registrarCertificado(safeName, percentage);
+      registrarCertificado(safeName, percentage, finalTime);
+      const completedData = { nome: safeName, percentage, tempo: finalTime };
+      localStorage.setItem("academia-b2b-completed", JSON.stringify(completedData));
+      setQuizCompleted(completedData);
     } catch (err) {
       console.error("Erro ao gerar certificado:", err);
       alert("Erro ao gerar certificado. Veja o console (F12).");
@@ -280,6 +317,34 @@ export default function Quiz() {
   // ===============================
   // RENDER
   // ===============================
+
+  // Tela de tentativa única — bloqueia após emitir o certificado
+  if (quizCompleted) {
+    return (
+      <div style={{ maxWidth: 560, margin: "80px auto", fontFamily: "Arial", textAlign: "center", padding: "0 24px" }}>
+        <div style={{ fontSize: 56, marginBottom: 16 }}>🎓</div>
+        <h2 style={{ color: "#004033", marginBottom: 8 }}>Você já concluiu a trilha!</h2>
+        <p style={{ color: "#555", fontSize: 15, marginBottom: 4 }}>
+          <strong>{quizCompleted.nome}</strong>
+        </p>
+        <p style={{ color: "#777", fontSize: 14, marginBottom: 28 }}>
+          {quizCompleted.percentage}% de acertos
+          {quizCompleted.tempo ? ` · ⏱ ${formatTime(quizCompleted.tempo)}` : ""}
+        </p>
+        <a
+          href="/ranking"
+          style={{
+            display: "inline-block",
+            background: "#004033", color: "white",
+            padding: "12px 28px", borderRadius: 10,
+            textDecoration: "none", fontWeight: "bold", fontSize: 15,
+          }}
+        >
+          🏆 Ver ranking
+        </a>
+      </div>
+    );
+  }
 
   if (step === "study") {
     const completedCount = completedContentIds.length;
@@ -461,7 +526,7 @@ export default function Quiz() {
                 </p>
                 <div style={{ display: "flex", gap: 12, justifyContent: "center" }}>
                   <button
-                    onClick={() => { setCurrent(0); setStep("quiz"); }}
+                    onClick={() => { setQuizStartTime(Date.now()); setCurrent(0); setStep("quiz"); }}
                     style={{ background: "#004033", color: "white", border: "none", padding: "12px 28px", borderRadius: 10, cursor: "pointer", fontWeight: "bold", fontSize: 15 }}
                   >
                     Iniciar Quiz →
@@ -486,8 +551,13 @@ export default function Quiz() {
 
     return (
       <div style={{ maxWidth: 720, margin: "40px auto", fontFamily: "Arial" }}>
-        <h2>Quiz</h2>
-        <p>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
+          <h2 style={{ margin: 0 }}>Quiz</h2>
+          <div style={{ fontSize: 20, fontWeight: "bold", color: "#004033", background: "#e8f5f0", padding: "6px 16px", borderRadius: 20 }}>
+            ⏱ {formatTime(timerSeconds)}
+          </div>
+        </div>
+        <p style={{ color: "#777", marginTop: 4 }}>
           Pergunta {current + 1} de {total}
         </p>
 
@@ -613,7 +683,7 @@ export default function Quiz() {
       <div style={{ maxWidth: 720, margin: "40px auto", fontFamily: "Arial" }}>
         <h2>Resultado</h2>
         <p>
-          Você acertou <b>{correctCount}</b> de <b>{total}</b> ({percentage}%)
+          Você acertou <b>{correctCount}</b> de <b>{total}</b> ({percentage}%) · ⏱ <b>{formatTime(finalTime)}</b>
         </p>
 
         {passed ? (

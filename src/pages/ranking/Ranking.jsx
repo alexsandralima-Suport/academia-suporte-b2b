@@ -2,6 +2,13 @@ import { useEffect, useState } from "react";
 
 const MEDALS = ["🥇", "🥈", "🥉"];
 
+function formatTime(seconds) {
+  const s = Number(seconds) || 0;
+  const m = Math.floor(s / 60);
+  const r = s % 60;
+  return `${m}:${String(r).padStart(2, "0")}`;
+}
+
 export default function Ranking() {
   const [ranking, setRanking] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -12,9 +19,11 @@ export default function Ranking() {
       .then(r => r.json())
       .then(data => {
         if (data.error) throw new Error(data.error);
-        const sorted = [...data].sort(
-          (a, b) => Number(b["Aproveitamento (%)"]) - Number(a["Aproveitamento (%)"])
-        );
+        const sorted = [...data].sort((a, b) => {
+          const pctDiff = Number(b["Aproveitamento (%)"]) - Number(a["Aproveitamento (%)"]);
+          if (pctDiff !== 0) return pctDiff;
+          return Number(a["Tempo (s)"]) - Number(b["Tempo (s)"]); // desempate: menor tempo ganha
+        });
         setRanking(sorted);
         setLoading(false);
       })
@@ -74,8 +83,11 @@ export default function Ranking() {
                 }}>
                   {person["Nome"]}
                 </div>
-                <div style={{ fontSize: 13, color: "#555", marginBottom: 10 }}>
+                <div style={{ fontSize: 13, color: "#555", marginBottom: 2 }}>
                   {person["Aproveitamento (%)"]}%
+                </div>
+                <div style={{ fontSize: 11, color: "#aaa", marginBottom: 10 }}>
+                  ⏱ {formatTime(person["Tempo (s)"])}
                 </div>
                 <div style={{
                   width: "100%", height: podiumH[vi], background: podiumBg[vi],
@@ -101,8 +113,8 @@ export default function Ranking() {
                 <th style={{ padding: "12px 16px", textAlign: "center", width: 48 }}>#</th>
                 <th style={{ padding: "12px 16px", textAlign: "left" }}>Nome</th>
                 <th style={{ padding: "12px 16px", textAlign: "center" }}>Aproveitamento</th>
+                <th style={{ padding: "12px 16px", textAlign: "center" }}>Tempo</th>
                 <th style={{ padding: "12px 16px", textAlign: "center" }}>Data</th>
-                <th style={{ padding: "12px 16px", textAlign: "center" }}>Hora</th>
               </tr>
             </thead>
             <tbody>
@@ -123,8 +135,10 @@ export default function Ranking() {
                       {p["Aproveitamento (%)"]}%
                     </span>
                   </td>
-                  <td style={{ padding: "12px 16px", textAlign: "center", color: "#888" }}>{p["Data"]}</td>
-                  <td style={{ padding: "12px 16px", textAlign: "center", color: "#aaa" }}>{p["Hora"]}</td>
+                  <td style={{ padding: "12px 16px", textAlign: "center", color: "#555", fontWeight: "500" }}>
+                    ⏱ {formatTime(p["Tempo (s)"])}
+                  </td>
+                  <td style={{ padding: "12px 16px", textAlign: "center", color: "#aaa" }}>{p["Data"]}</td>
                 </tr>
               ))}
             </tbody>
