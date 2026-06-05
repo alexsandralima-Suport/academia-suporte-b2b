@@ -1,428 +1,551 @@
 export default function Base4BIZ() {
   return (
     <>
-      <h1>Base de Conhecimento – 4BIZ</h1>
+      <h1>Playbook de Atendimento – 4BIZ</h1>
+      <p>Versão 2026 · Uso Interno · Confidencial</p>
+
+      <hr />
+
+      <h2>1. Introdução</h2>
       <p>
-        Este material foi elaborado para auxiliar o time de suporte na compreensão
-        de análises e possíveis cenários mapeados.
+        Este playbook tem como objetivo padronizar o atendimento aos clientes
+        4biz, garantindo agilidade, consistência e qualidade nas interações. A
+        proposta é facilitar a execução no dia a dia, reduzir dúvidas
+        operacionais e assegurar que todos os processos sejam realizados de
+        forma correta.
+      </p>
+      <p>
+        <strong>Lembre-se:</strong> antes de executar qualquer ação, confirme a
+        identidade e o contrato do cliente no Mr Big. Em caso de dúvida,
+        consulte o CS de referência no Slack.
       </p>
 
       <hr />
 
-      <h2>1. Modais de Limite Atingido</h2>
+      <h2>2. Sistemas Utilizados</h2>
       <p>
-        <strong>Descrição:</strong> esta categoria se refere às situações em que o
-        sistema exibe um modal de bloqueio por limite de uso ou restrição
-        contratual. Abaixo, os principais cenários com seus respectivos contextos.
+        O atendimento 4biz utiliza diferentes sistemas que devem ser acionados
+        conforme o tipo de solicitação do cliente.
       </p>
 
-      <h3>1.1 Plano contratado não possui módulo de processos</h3>
-      <ul>
-        <li>
-          <strong>Informação interna:</strong> clientes legados podem ter pacotes
-          antigos, nos quais a consulta processual era vendida separadamente.
-        </li>
-        <li>
-          Mesmo com nomes como <strong>“Pesquisa Básica”</strong> ou{" "}
-          <strong>“Pesquisa Avançada”</strong>, o módulo de processos pode não
-          estar incluído.
-        </li>
-        <li>
-          Usuários novos dessas contas podem tentar usar a funcionalidade sem
-          saber que não têm acesso.
-        </li>
-      </ul>
-
-      <h3>1.2 Limite de consultas por CPF ou CNPJ atingido</h3>
-      <ul>
-        <li>
-          Existe um limite mensal de <strong> 30 consultas</strong> por CPF/CNPJ
-          por organização.
-        </li>
-        <li>
-          Esse limite não é informado ao cliente. Após atingi-lo, qualquer nova
-          consulta é bloqueada.
-        </li>
-      </ul>
-
-      <h3>1.3 Limite de acompanhamento de processos atingido</h3>
-      <ul>
-        <li>
-          Sempre que o cliente baixa um documento ou clica em{" "}
-          <strong>“verificar processo”</strong> no JPV, o sistema começa a
-          monitorar automaticamente aquele processo.
-        </li>
-        <li>
-          Cada usuário contribui com <strong>5 acompanhamentos</strong>, somando ao
-          limite total da organização.
-        </li>
-        <li>
-          Exemplo: <strong>5 usuários contratados → 5 x 5 = 25 acompanhamentos</strong>{" "}
-          no total.
-        </li>
-        <li>
-          O limite é <strong>compartilhado</strong> (não é fracionado por usuário).
-        </li>
-        <li>
-          Um único perfil pode utilizar todos os acompanhamentos disponíveis na
-          conta.
-        </li>
-        <li>
-          O plano foi estruturado para um mínimo de 5 usuários, então mesmo que a
-          organização tenha menos usuários cadastrados, o limite mínimo de{" "}
-          <strong>25 acompanhamentos</strong> permanece (vinculado ao plano, não à
-          quantidade de acessos ativos).
-        </li>
-      </ul>
-
-      <p>
-        <strong>Importante:</strong> independente da forma de consulta (CPF, CNPJ,
-        nome da parte ou número do processo), o que conta para o limite é o{" "}
-        <strong>número de processos acompanhados</strong>, não o tipo de dado
-        consultado.
-      </p>
-
-      <p>
-        <strong>Observação (problema conhecido):</strong> existe uma distorção nos
-        dados exibidos no campo <code>monitor_lawsuit</code> do Toolbelt, causada
-        pela alternância entre ambientes após a separação do EO e JPV.
-      </p>
-      <ul>
-        <li>
-          Processos acompanhados no <strong>JPV</strong> aparecem apenas no JPV.
-        </li>
-        <li>
-          Acompanhamentos feitos no <strong>EO</strong> aparecem apenas no EO.
-        </li>
-        <li>
-          Os ambientes são independentes e os créditos não são unificados.
-        </li>
-        <li>O limite de consultas e acompanhamentos não é informado ao cliente.</li>
-      </ul>
-
-      <h3>1.4 Não permite o download de documentos (ambiente JPV)</h3>
-      <ul>
-        <li>
-          Clicar em <strong>“verificar processo”</strong> ou{" "}
-          <strong>“baixar documento”</strong> ativa automaticamente o
-          acompanhamento do processo.
-        </li>
-        <li>
-          Se o limite de acompanhamento da organização já tiver sido atingido, o
-          download será bloqueado.
-        </li>
-      </ul>
-
-      <h3>1.5 Não permite baixar peças processuais</h3>
-      <ul>
-        <li>
-          O sistema bloqueia o download das peças processuais até que a OAB do
-          usuário seja verificada.
-        </li>
-        <li>
-          Enquanto a verificação não for concluída, o acesso permanece
-          indisponível.
-        </li>
-      </ul>
-
-      <h4>Regra de Produto – Acesso ao módulo de Peças</h4>
-      <p>
-        Desde <strong>05/12/2023</strong>, o acesso ao módulo de peças processuais
-        foi restrito a usuários com <strong>OAB validada</strong>.
-      </p>
-
-      <h4>Como funciona a validação</h4>
-      <p>
-        Quando o usuário se identifica como advogado(a), uma modal de validação é
-        exibida solicitando:
-      </p>
-      <ul>
-        <li>CPF</li>
-        <li>Data de nascimento</li>
-        <li>Telefone</li>
-        <li>Dados da OAB</li>
-      </ul>
-      <p>
-        A validação é feita via integração com serviços da Receita Federal e OAB
-        (via sistema chamado <strong>Severino</strong>).
-      </p>
-      <p>
-        <strong>Importante:</strong> após 1 ano, a validação da OAB costuma
-        expirar, e o usuário precisará refazer o processo de verificação para
-        continuar acessando peças processuais.
-      </p>
+      <table style={{ borderCollapse: "collapse", width: "100%" }}>
+        <thead>
+          <tr>
+            <th style={{ border: "1px solid #ccc", padding: "8px", textAlign: "left" }}>
+              Sistema
+            </th>
+            <th style={{ border: "1px solid #ccc", padding: "8px", textAlign: "left" }}>
+              Quando usar
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style={{ border: "1px solid #ccc", padding: "8px" }}>
+              <a
+                href="https://mandioca-admin.apps.jusbr.com/admin/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <strong>Mandioca</strong>
+              </a>
+            </td>
+            <td style={{ border: "1px solid #ccc", padding: "8px" }}>
+              Verificar e remover e-mails em blacklist. Essencial em casos de
+              não recebimento de convites ou comunicações.
+            </td>
+          </tr>
+          <tr>
+            <td style={{ border: "1px solid #ccc", padding: "8px" }}>
+              <a
+                href="https://mrbig-admin-production.apps.jusbr.com/admin"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <strong>Mr Big</strong>
+              </a>
+            </td>
+            <td style={{ border: "1px solid #ccc", padding: "8px" }}>
+              Validar informações contratuais, plano ativo e identificar o
+              usuário administrador.
+            </td>
+          </tr>
+          <tr>
+            <td style={{ border: "1px solid #ccc", padding: "8px" }}>
+              <a
+                href="https://jusbrasil.pipedrive.com/pipeline/8/user/everyone?quickFilter=none"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <strong>Pipedrive</strong>
+              </a>
+            </td>
+            <td style={{ border: "1px solid #ccc", padding: "8px" }}>
+              CRM para consultar histórico do cliente e identificar o CS
+              responsável pelo contrato.
+            </td>
+          </tr>
+          <tr>
+            <td style={{ border: "1px solid #ccc", padding: "8px" }}>
+              <a
+                href="https://jusbrasil.slack.com/archives/D09C24X5D7S"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <strong>Jarvis (Slack)</strong>
+              </a>
+            </td>
+            <td style={{ border: "1px solid #ccc", padding: "8px" }}>
+              Robô para executar comandos e alterações nos perfis dos usuários.
+            </td>
+          </tr>
+          <tr>
+            <td style={{ border: "1px solid #ccc", padding: "8px" }}>
+              <a
+                href="https://metabase.apps.jusbr.com/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <strong>Metabase</strong>
+              </a>
+            </td>
+            <td style={{ border: "1px solid #ccc", padding: "8px" }}>
+              Validar envio de e-mails e analisar dados. Atenção: pode haver
+              delay de até 24h nas informações.
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
       <hr />
 
-      <h2>2. Procedimento para Análise de Bloqueio de Funcionalidade</h2>
+      <h2>3. Procedimentos de Atendimento</h2>
 
-      <h3>2.1 Se der para identificar o cenário pelo relato/print</h3>
-      <p>Adapte o discurso diretamente conforme o contexto identificado:</p>
-
-      <ul>
-        <li>
-          Se tentou baixar um arquivo:{" "}
-          <em>
-            “Você lembra qual era o processo ou documento que tentou baixar? Pode
-            me passar o dado e o e-mail da conta? Assim consigo testar por aqui.”
-          </em>
-        </li>
-        <li>
-          Se tentou acompanhar um processo:{" "}
-          <em>
-            “Consegue me enviar o número do processo e o e-mail logado? Isso vai
-            ajudar a entender certinho onde o bloqueio ocorreu.”
-          </em>
-        </li>
-        <li>
-          Se tentou consultar por CPF/CNPJ:{" "}
-          <em>
-            “Pode me informar qual CPF ou CNPJ usou na consulta? E o e-mail da
-            conta? Com isso consigo reproduzir aqui e te ajudar melhor.”
-          </em>
-        </li>
-        <li>
-          Se tentou baixar alguma peça processual:{" "}
-          <em>
-            “Pode me informar o e-mail da conta que estava usando? Assim consigo
-            verificar aqui internamente o que pode ter acontecido.”
-          </em>
-        </li>
-      </ul>
-
+      <h3>3.1 Cliente não recebe e-mail — Remoção Individual</h3>
       <p>
-        <strong>Importante:</strong> sempre solicitar o e-mail do cliente.
+        Quando o cliente informa que não recebeu o convite ou qualquer
+        comunicação, o primeiro passo é verificar no Mandioca se o e-mail está
+        em blacklist.
       </p>
 
+      <h4>Passo a passo</h4>
+      <ol>
+        <li>Acesse o Mandioca Admin e pesquise pelo e-mail do cliente.</li>
+        <li>
+          Se estiver bloqueado, aparecerá a opção de deletar — clique e
+          confirme.
+        </li>
+        <li>Reenvie o convite ao cliente.</li>
+        <li>
+          Retorne ao cliente informando que o problema foi identificado e
+          corrigido.
+        </li>
+      </ol>
+
       <p>
-        Se o cliente perguntar por que o e-mail é necessário, responda:
-        <br />
+        <strong>Exemplo de resposta:</strong>{" "}
         <em>
-          “Precisamos do e-mail para identificar corretamente o seu perfil e
-          consultar as configurações do plano da sua organização, tá bem?”
+          "Identificamos que seu e-mail estava bloqueado em nosso sistema. Já
+          realizamos a correção e reenviamos o convite. Caso não localize na
+          caixa de entrada, por favor verifique também a pasta de spam."
         </em>
       </p>
 
-      <h3>2.2 Se não der para identificar o cenário no primeiro contato</h3>
-      <p>Sugestão de abordagem:</p>
+      <h3>3.2 Cliente não recebe e-mail — Remoção em Massa por Domínio</h3>
       <p>
-        <em>
-          “Para que possamos compreender com mais precisão a origem da mensagem
-          de limite apresentada, você pode nos informar qual ação estava
-          executando no momento? Por exemplo: estava tentando realizar uma
-          consulta por CPF, número do processo, acompanhar algum processo
-          específico ou baixar um arquivo/peça processual?”
-        </em>
+        Quando a solicitação envolve múltiplos e-mails do mesmo domínio (ex:
+        todos os usuários de @cliente.com.br), a interface admin do Mandioca
+        não suporta remoção em massa. O procedimento é diferente.
+      </p>
+      <p>
+        <strong>Atenção:</strong> use este fluxo para remoções de muitos
+        e-mails ou quando a solicitação for por domínio inteiro. Para 1–2
+        e-mails, use o procedimento 3.1.
       </p>
 
-      <p>Dados que devemos solicitar para reproduzir o cenário:</p>
+      <h4>Passo 1 — Verificar no Metabase</h4>
+      <p>
+        Confirme quais e-mails do domínio estão na blacklist e qual o motivo:
+      </p>
+      <p>
+        <strong>Banco:</strong> BigQuery
+      </p>
+      <pre
+        style={{
+          background: "#f4f4f4",
+          padding: "12px",
+          borderRadius: 6,
+          overflowX: "auto",
+          fontSize: "0.9em",
+        }}
+      >
+        {`SELECT email, type, dsn\nFROM \`data_production_mandioca_db.mandioca_blacklist\`\nWHERE domain = 'dominio.com.br'\nORDER BY email`}
+      </pre>
+      <p>Exporte o resultado como planilha (.xlsx) para anexar na solicitação.</p>
+
+      <h4>Motivos mais comuns de entrada na blacklist</h4>
+      <table style={{ borderCollapse: "collapse", width: "100%" }}>
+        <thead>
+          <tr>
+            <th style={{ border: "1px solid #ccc", padding: "8px", textAlign: "left" }}>
+              Tipo
+            </th>
+            <th style={{ border: "1px solid #ccc", padding: "8px", textAlign: "left" }}>
+              Causa Provável
+            </th>
+            <th style={{ border: "1px solid #ccc", padding: "8px", textAlign: "left" }}>
+              Observação
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style={{ border: "1px solid #ccc", padding: "8px" }}>
+              <code>SOFT_BOUNCE</code>
+            </td>
+            <td style={{ border: "1px solid #ccc", padding: "8px" }}>
+              Instabilidade temporária no servidor de destino
+            </td>
+            <td style={{ border: "1px solid #ccc", padding: "8px" }}>
+              Acúmulo de rejeições temporárias
+            </td>
+          </tr>
+          <tr>
+            <td style={{ border: "1px solid #ccc", padding: "8px" }}>
+              <code>HARD_BOUNCE 5.7.1</code>
+            </td>
+            <td style={{ border: "1px solid #ccc", padding: "8px" }}>
+              Rejeição por política SPF/DKIM/DMARC
+            </td>
+            <td style={{ border: "1px solid #ccc", padding: "8px" }}>
+              Problema de autenticação do remetente
+            </td>
+          </tr>
+          <tr>
+            <td style={{ border: "1px solid #ccc", padding: "8px" }}>
+              <code>HARD_BOUNCE 5.1.1</code>
+            </td>
+            <td style={{ border: "1px solid #ccc", padding: "8px" }}>
+              Endereço de e-mail inexistente
+            </td>
+            <td style={{ border: "1px solid #ccc", padding: "8px" }}>
+              Verificar se o e-mail ainda é válido
+            </td>
+          </tr>
+          <tr>
+            <td style={{ border: "1px solid #ccc", padding: "8px" }}>
+              <code>HARD_BOUNCE 5.0.0</code>
+            </td>
+            <td style={{ border: "1px solid #ccc", padding: "8px" }}>
+              Erro genérico de rejeição permanente
+            </td>
+            <td style={{ border: "1px solid #ccc", padding: "8px" }}>
+              Verificar logs do servidor de destino
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4>Passo 2 — Acionar o time de Traffic no Slack</h4>
       <ul>
-        <li>O dado utilizado na tentativa (CPF, número do processo etc.)</li>
-        <li>O e-mail da conta utilizada</li>
-        <li>O nome da organização à qual a conta pertence</li>
+        <li>
+          Canal: <strong>#teamacquisitionidentity</strong>
+        </li>
+        <li>
+          Marcar: <strong>@metal</strong> (time de Traffic)
+        </li>
+        <li>
+          Incluir na mensagem: domínio, volume de e-mails, motivo e a planilha
+          exportada
+        </li>
       </ul>
 
       <p>
-        Mensagem sugerida ao cliente:
-        <br />
+        <strong>Modelo de mensagem:</strong>{" "}
         <em>
-          “Para que possamos reproduzir o cenário internamente e investigar com
-          mais precisão, você pode, por gentileza, nos informar: o dado utilizado
-          (ex: CPF, número do processo etc.), o e-mail da conta utilizada e o
-          nome da organização à qual a conta pertence?”
+          "Oi @metal, tudo bem? Precisamos remover e-mails do domínio
+          [dominio.com.br] da blacklist do Mandioca a pedido do cliente [Nome].
+          Volume: [X] e-mails. Segue a lista em anexo. Consegue nos apoiar?"
         </em>
       </p>
 
+      <h4>Passo 3 — Validar após a execução</h4>
+      <ol>
+        <li>Aguardar confirmação do @metal.</li>
+        <li>Reexecutar a query no Metabase (pode haver delay de até 24h).</li>
+        <li>
+          Validar 2–3 e-mails diretamente no admin do Mandioca para confirmar.
+        </li>
+        <li>Retornar ao cliente confirmando a correção.</li>
+      </ol>
+
       <p>
-        Se o cliente questionar o motivo do e-mail, responda:
-        <br />
+        <strong>Exemplo de resposta:</strong>{" "}
         <em>
-          “Precisamos desses dados para identificar corretamente o seu perfil e
-          consultar as configurações do plano da sua organização, tudo bem?”
+          "Identificamos que os e-mails do seu domínio estavam bloqueados em
+          nosso sistema. Já realizamos a correção. Caso algum usuário ainda não
+          receba os e-mails, peço que nos informe para verificarmos
+          individualmente."
         </em>
       </p>
+
+      <h3>3.3 Adicionar Usuários</h3>
+      <p>
+        Nos casos em que o cliente solicita a adição de um novo usuário, é
+        necessário acessar o Mr Big para identificar o contrato e confirmar
+        quem é o usuário administrador.
+      </p>
+
+      <h4>Passo a passo</h4>
+      <ol>
+        <li>Acesse o Mr Big e localize o contrato do cliente.</li>
+        <li>Identifique o usuário administrador.</li>
+        <li>
+          Acesse o perfil Jusbrasil do admin e realize o Take Over:{" "}
+          <em>Perfil &gt; 3 pontinhos &gt; Gerenciar &gt; Take Over</em>
+        </li>
+        <li>
+          Na Gestão de Convites, insira o nome completo e e-mail do novo
+          usuário e envie o convite:{" "}
+          <em>Perfil &gt; 3 Pontinhos &gt; Ir para Gestão de Convites</em>
+        </li>
+        <li>Informe o cliente que o convite foi enviado.</li>
+      </ol>
+
+      <p>
+        <strong>Exemplo de resposta:</strong>{" "}
+        <em>
+          "O convite foi enviado para o e-mail informado. Assim que aceito, o
+          usuário passará a ter acesso ao plano contratado."
+        </em>
+      </p>
+
+      <h3>3.4 Remover Usuário</h3>
+      <p>
+        Quando houver solicitação de remoção de usuário, o processo deve ser
+        realizado através do Take Over.
+      </p>
+
+      <h4>Passo a passo</h4>
+      <ol>
+        <li>Acesse o Mr Big e localize o contrato.</li>
+        <li>Realize o Take Over no perfil do administrador.</li>
+        <li>Selecione o usuário desejado e remova seu acesso ao plano.</li>
+        <li>Confirme a remoção ao cliente.</li>
+      </ol>
+
+      <p>
+        <strong>Exemplo de resposta:</strong>{" "}
+        <em>"O usuário foi removido do plano."</em>
+      </p>
+
+      <h3>3.5 Limite de Consultas Atingido</h3>
+      <p>
+        Nos casos em que o cliente informa que não consegue realizar consultas
+        por CPF ou processos devido ao limite atingido, siga o diagnóstico
+        abaixo.
+      </p>
+
+      <h4>Passo a passo</h4>
+      <ol>
+        <li>
+          No Jarvis (Slack &gt; Aplicativos), execute o comando{" "}
+          <code>profiles-by-email</code> com o e-mail do cliente.
+        </li>
+        <li>
+          Valide no BoxToolbelt a métrica{" "}
+          <code>view_ls_entity_content_upper_bound</code> (Funcionalidades
+          Permitidas &gt; view_ls_entity_content_upper_bound).
+        </li>
+        <li>
+          Se a quota foi atingida, não realize nenhuma liberação manual —
+          oriente o cliente sobre a limitação do plano.
+        </li>
+        <li>
+          Inclua ou mencione o CS responsável para dar continuidade à conversa.
+        </li>
+      </ol>
+
+      <p>
+        <strong>Atenção:</strong> nunca libere manualmente a quota de consultas.
+        O correto é orientar o cliente e acionar o CS.
+      </p>
+
+      <p>
+        <strong>Exemplo de resposta:</strong>{" "}
+        <em>
+          "Não há um número fixo de consultas, pois o controle é feito por
+          algoritmo. Ao identificar um alto volume de pesquisas, o sistema pode
+          aplicar restrições temporárias. Esse comportamento ocorre porque o
+          plano atual não é voltado para consultas em larga escala. Caso
+          precisem de maior volume, existem soluções do Jusbrasil mais
+          adequadas. Estou incluindo o CS responsável para apoiar vocês nessa
+          avaliação."
+        </em>
+      </p>
+
+      <h3>3.6 Perfil sem Assinatura Ativa</h3>
+      <p>
+        Quando o cliente informa que, ao acessar o Jusbrasil com o e-mail
+        institucional, não consegue utilizar as funcionalidades da parceria.
+      </p>
+
+      <h4>Passo a passo</h4>
+      <ol>
+        <li>
+          No Mr Big, localize o contrato da parceria e acesse o perfil do
+          administrador.
+        </li>
+        <li>
+          Realize o Take Over e verifique se o e-mail do solicitante consta
+          como ativo ou pendente.
+        </li>
+        <li>
+          Se o usuário consta como ativo, mas não está vinculado, execute no
+          Jarvis o comando <code>profiles-by-email</code> com o e-mail do
+          solicitante.
+        </li>
+        <li>
+          Acesse o BoxToolbelt (fora do Take Over), clique em{" "}
+          <strong>Link BoxToolbelt</strong> e navegue até{" "}
+          <strong>contas vinculadas</strong>.
+        </li>
+        <li>
+          Se o perfil não estiver associado a nenhuma conta, retorne ao perfil
+          do admin, realize o Take Over, remova o usuário e reenvie o convite.
+        </li>
+        <li>Informe o cliente que o convite foi reenviado.</li>
+      </ol>
+
+      <p>
+        <strong>Curiosidade:</strong> no Mr Big existe a configuração{" "}
+        <em>
+          "Dias para expiração dos benefícios em caso de inatividade (válido
+          somente para login via Domínio Corporativo)"
+        </em>
+        . Usuários podem perder acesso após inatividade — comportamento esperado
+        do sistema.
+      </p>
+
+      <p>
+        <strong>Exemplo de resposta:</strong>{" "}
+        <em>
+          "Identificamos que seu usuário não estava diretamente vinculado ao
+          plano da parceria. Realizamos o reenvio do convite de acesso. Assim
+          que você aceitar, o vínculo será restabelecido e as funcionalidades
+          estarão disponíveis."
+        </em>
+      </p>
+
+      <h3>3.7 Verificação de Identidade (CPF em mais de uma conta)</h3>
+      <p>
+        Quando é identificado que o mesmo CPF está cadastrado em mais de uma
+        conta. A regra do sistema permite que cada CPF esteja vinculado a
+        apenas uma conta.
+      </p>
+
+      <h4>Passo a passo</h4>
+      <ol>
+        <li>Oriente o cliente sobre a regra (um CPF por conta).</li>
+        <li>
+          Solicite ao cliente: documento com foto (para validação de identidade)
+          e e-mail da conta anterior.
+        </li>
+        <li>Valide se os dados correspondem à mesma pessoa.</li>
+        <li>
+          Confirmada a identidade, realize a remoção do CPF via Jarvis:
+          <br />
+          <code>@jarvis remover-cpf-e-documentos-relacionados PID CPF</code>
+        </li>
+        <li>
+          Se o comando não funcionar ou ocorrer erro, abra uma solicitação no
+          canal <strong>#teamacquisitionidentity</strong> para o time de
+          segurança.
+        </li>
+      </ol>
 
       <hr />
 
-      <h2>3. Simulação e reprodução do bloqueio (Jarvis + Take Over)</h2>
+      <h2>4. Canais e Contatos de Suporte Interno</h2>
+      <p>Quando escalar ou precisar de apoio, utilize os canais corretos:</p>
 
-      <h3>3.1 Consultar o e-mail no Jarvis</h3>
-      <p>
-        No Slack, execute o comando no app do Jarvis:
-        <br />
-        <code>profiles-by-email emaildocliente</code>
-      </p>
+      <table style={{ borderCollapse: "collapse", width: "100%" }}>
+        <thead>
+          <tr>
+            <th style={{ border: "1px solid #ccc", padding: "8px", textAlign: "left" }}>
+              Situação
+            </th>
+            <th style={{ border: "1px solid #ccc", padding: "8px", textAlign: "left" }}>
+              Canal / Contato
+            </th>
+            <th style={{ border: "1px solid #ccc", padding: "8px", textAlign: "left" }}>
+              Observação
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style={{ border: "1px solid #ccc", padding: "8px" }}>
+              Remoção em massa de blacklist
+            </td>
+            <td style={{ border: "1px solid #ccc", padding: "8px" }}>
+              #teamacquisitionidentity (@metal)
+            </td>
+            <td style={{ border: "1px solid #ccc", padding: "8px" }}>
+              Enviar lista de e-mails + domínio
+            </td>
+          </tr>
+          <tr>
+            <td style={{ border: "1px solid #ccc", padding: "8px" }}>
+              CPF duplicado / problema de segurança
+            </td>
+            <td style={{ border: "1px solid #ccc", padding: "8px" }}>
+              #teamacquisitionidentity
+            </td>
+            <td style={{ border: "1px solid #ccc", padding: "8px" }}>
+              Enviar documento com foto, PID e CPF
+            </td>
+          </tr>
+          <tr>
+            <td style={{ border: "1px solid #ccc", padding: "8px" }}>
+              Limite de consultas / upgrade de plano
+            </td>
+            <td style={{ border: "1px solid #ccc", padding: "8px" }}>
+              CS responsável pelo contrato
+            </td>
+            <td style={{ border: "1px solid #ccc", padding: "8px" }}>
+              Consultar via Pipedrive
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-      <h3>3.2 Acessar o link do perfil retornado</h3>
-      <p>
-        No retorno do Jarvis, clique no link após <strong>“Link do perfil”</strong>{" "}
-        para abrir o perfil completo do cliente.
-      </p>
+      <hr />
 
-      <p>
-        <strong>Dica:</strong> quando o comando retorna dois conjuntos de dados
-        para o mesmo e-mail, isso significa que o e-mail do perfil administrativo
-        da organização é o mesmo do perfil pessoal do administrador.
-      </p>
-
-      <p>Interpretação dos retornos:</p>
+      <h2>5. Boas Práticas de Atendimento</h2>
       <ul>
-        <li>Primeiro retorno: perfil individual do administrador (pessoa física)</li>
-        <li>Segundo retorno: perfil do grupo/organização (perfil institucional)</li>
+        <li>
+          Sempre confirme a identidade e o contrato do cliente antes de executar
+          qualquer ação.
+        </li>
+        <li>
+          Ao validar dados no Metabase, considere o delay de até 24h — sempre
+          valide ações críticas diretamente no sistema de origem (Mandioca, Mr
+          Big).
+        </li>
+        <li>
+          Nunca libere quotas ou permissões manualmente sem orientação do CS ou
+          time responsável.
+        </li>
+        <li>
+          Em caso de dúvida, escale antes de agir — é melhor perguntar do que
+          desfazer uma ação incorreta.
+        </li>
+        <li>
+          Oriente sempre o cliente a verificar a pasta de spam quando o problema
+          for de não recebimento de e-mails.
+        </li>
       </ul>
-
-      <h3>3.3 Realizar Take Over</h3>
-      <p>
-        Acesse a conta do cliente via Take Over e tente reproduzir exatamente a
-        ação relatada, usando os dados fornecidos.
-      </p>
-
-      <hr />
-
-      <h2>4. Simulação no JPV (dica de filtros)</h2>
-      <p>Para realizar testes e simulações com mais precisão:</p>
-      <ol>
-        <li>No canto superior esquerdo, clique em <strong>“JPV”</strong> ou <strong>“Para Você”</strong>.</li>
-        <li>No menu lateral esquerdo, selecione <strong>“Pesquisa Jurídica”</strong>.</li>
-        <li>
-          No campo <strong>“Todos”</strong>, aplique o filtro conforme o tipo de
-          análise (ex: Consulta Processual, Modelos, Peças Processuais, etc.).
-        </li>
-      </ol>
-
-        <img
-        src="https://lh3.googleusercontent.com/sitesv/AAzXCked0-Id4TnC6Zl1JUMr5RcZfSmoXcc4IUF0dXFOt5Bvf13qN3ahOAoOIRYqKo_hmcHLoLdt6dB5kuEVk8XQ0mwK4kI847UrUXegW9MHvxgRigxegSRw9M7KFbC5mjn3JMKHrX0DPOUfb2YTVntluGpnwSSbKH8PIZL4H3hSRbur79fIk0FAgXuAtd8I2VDwckk786-QcFZNX4WnNQaeNZ-iYp1hH3UZz0iWCD0=w1280"
-        alt="Tela de exemplo do Digesto IP"
-        style={{ maxWidth: "70%", margin: "16px 0", borderRadius: 8 }}
-      />
-
-      <h3>4.1 Testar se a organização não possui módulo de processos</h3>
-      <ol>
-        <li>No JPV, faça uma consulta por CPF.</li>
-        <li>Em seguida, faça uma consulta por número do processo.</li>
-      </ol>
-      <p>
-        Se o modal aparecer em ambas as tentativas, é provável que a organização
-        não possua o módulo de processos contratado (cliente legado).
-      </p>
-
-      <h3>4.2 Limite de consultas por CPF/CNPJ</h3>
-      <ol>
-        <li>Acesse JPV → Pesquisa Jurídica.</li>
-        <li>Selecione o filtro <strong>Consulta Processual</strong>.</li>
-        <li>Digite um CPF ou CNPJ para testar.</li>
-      </ol>
-      <p>
-        Se o modal aparecer, a conta pode ter atingido o limite mensal de 100
-        consultas por CPF/CNPJ (compartilhado entre todos os usuários).
-      </p>
-
-      <h3>4.3 Limite de acompanhamento de processos</h3>
-      <ol>
-        <li>Após consultar um processo, clique em <strong>Verificar Processo</strong> ou no ícone do sino.</li>
-      </ol>
-      <p>
-        Se o modal aparecer, é provável que o limite de acompanhamento tenha sido
-        alcançado.
-      </p>
-
-      <h3>4.4 Download de documentos (JPV)</h3>
-      <p>
-        Tente baixar um documento de um processo. O bloqueio geralmente ocorre
-        quando o limite de acompanhamento foi atingido, já que o sistema tenta
-        acompanhar automaticamente ao clicar em “baixar”.
-      </p>
-
-      <h3>4.5 Peças processuais bloqueadas (OAB não verificada)</h3>
-      <p>
-        Tente acessar alguma peça processual ou modelo jurídico. Se o acesso for
-        negado, é provável que a OAB do usuário ainda não esteja verificada.
-      </p>
-
-      <hr />
-
-      <h2>5. Como investigar se o grupo não possui o módulo de processos</h2>
-      <p>
-        <strong>Informação interna:</strong> atenção com clientes legados: antes,
-        a consulta processual era comercializada separadamente. Hoje, todos os
-        pacotes já incluem consulta processual, mas clientes legados podem estar
-        com planos antigos.
-      </p>
-
-      <h3>5.1 Opção 1: teste no ambiente do usuário</h3>
-      <ol>
-        <li>No JPV, faça uma consulta por CPF.</li>
-        <li>Em seguida, faça uma consulta por número do processo.</li>
-      </ol>
-      <p>
-        Se o modal aparecer em ambas as tentativas, é provável que a organização
-        não possua o módulo de processos contratado.
-      </p>
-          <img
-        src="https://lh3.googleusercontent.com/sitesv/AAzXCkfuP4qyiav6bykKGtZnespPlAemGdbUXcQpyvHZYh8dn5oveWYT8FkYKgMdWMevipn9TvBdeAt6QIGsUyydT4yj-Pr5bFoDak4JNC20qdpBx-o68fF2VTAxJ998B501KcbAou1ycUjrjy6Hy9Lrl1Ri-9IKsrC99dR_CDro3iQ770w-n3ERUVwtv2A=w1280"
-        alt="Tela de exemplo do Digesto IP"
-        style={{ maxWidth: "45%", margin: "16px 0", borderRadius: 8 }}
-      />
-       <img
-        src="https://lh3.googleusercontent.com/sitesv/AAzXCkcfNGTSqdWBfB8C4tF2if7yMsoz9eU-dj79QRvmLZZM7R8WkGW4qbRSRJ30HXBzzMz-ccKqj_Sjd5LkV8a4FVOxdd_-nYcUlnC93MgVs-GBqKMrlB5zOv4Z3jNDaAjxy39PdI0D3gM0OQpR8B77Z4UZHjaaJ_AeSsSFrU37nJcKj4GFgbbjGONkouwSAapHCH-IjbMjhFCydRDzVQs3JEBhYs6lYXStxmjN9g8=w1280"
-        alt="Tela de exemplo do Digesto IP"
-        style={{ maxWidth: "50%", margin: "16px 0", borderRadius: 8 }}
-      />
-        <img
-        src="https://lh3.googleusercontent.com/sitesv/AAzXCkfC8v_7hTjKAExFHBDpy_1irNH-4RqRIpvz74BqeIOdGKfyn92cu6EvewkunMXD68uX9GJuE6WB3io5G0R8kXE_8MfD-yIkUfwn3JLumaymAvXfr86Nu0DbQAUNOeAxrOFDgPOoBWmFn-TS5pZ8TXLs33caMk1R6qGYqAsh04suyb1Jkz7z6N7wrLm_B0iFrWlu9l0k02C8tMTaSvBNEwlOcbCyCoKcWiojPpE=w1280"
-        alt="Tela de exemplo do Digesto IP"
-        style={{ maxWidth: "45%", margin: "16px 0", borderRadius: 8 }}
-      />
-      <img
-        src="https://lh3.googleusercontent.com/sitesv/AAzXCkcmorEVd7TYWObXXSlUvkBhqEud6fY9yZrpUXlVzGU_7ZhB08j7uVLG5uEdKJV0DSKcpcK_3qG9Jm8ufFXYQyAFGBbh2qmF7EEt7_EEDGLefpzkYuMeGNDLOrOFoZ_rVdk1IVFlbqLPGTocWen9JzxqqMeYeWgQRwiPkj_RmZ2PPpftIku09ZJJq6tGUmDBBv0cWlRXLXUbofjV58RBRuOtrb2_wqeIa1fQ=w1280"
-        alt="Tela de exemplo do Digesto IP"
-        style={{ maxWidth: "40%", margin: "16px 0", borderRadius: 8 }}
-      />
-      <h3>5.2 Opção 2: conferir o plano no perfil do grupo</h3>
-      <ol>
-        <li>No link do perfil do grupo, clique nos três pontinhos → <strong>Gerenciar</strong>.</li>
-        <li>
-          Verifique o campo <strong>Plano</strong>. Se aparecer{" "}
-          <strong>“Pesquisa Jurídica para Empresas”</strong>, isso indica que a
-          organização não possui um plano de processos no pacote.
-        </li>
-        <li>
-          Verifique o campo <strong>Plano</strong>. Se aparecer{" "}
-          <strong>“Acompanhamento de processos”</strong>, isso indica que a
-          organização possui um plano de processos no pacote.
-        </li>
-      </ol>
-       <img
-        src="https://lh3.googleusercontent.com/sitesv/AAzXCkesnXbWy9mTAP7wkLso6AD6RCsQQUuurOkV10cUdIsd--lpCIFwT3JkIdIMMJ9yX_naq5H7YtNcrccBhSigqJ84pV518sE_p2Eq3vix5UTTYEGfkO5DZsIzVFRC_8Io_OyDwbaVQ9OfJ1_iMvcmbb5N8jYEAlU6fKqCF_XuYhim4XL8s9ASJVwbgfDMkzPbWfe2iQZOxsgqKpjt_ZQxGoReUTcao8M3cw=w1280"
-        alt="Tela de exemplo do Digesto IP"
-        style={{ maxWidth: "50%", margin: "16px 0", borderRadius: 8 }}
-      />
-       <img
-        src="https://lh3.googleusercontent.com/sitesv/AAzXCkeRaqEMccHYJWONFZUNLNM8SKB0YpwqLrFP4YTMV0GhLmARYnuiJgEmPnJwjB2Geo6KdG3bUpS4hvVku6CMbN8XoQMyPWWmDWtkAIl-v2zBM9p6AxQEx1VjROu3XZTKL2pQp_ofBecIiKwTUZEoiZOSHB4-Dl7cMRPOt0CalQd3J8EK8TdVlRjX2sjZQYSUM9gZFDONgv9Q7DvD-EhPv_5SlMCOMKMUoHoe99E=w1280"
-        alt="Tela de exemplo do Digesto IP"
-        style={{ maxWidth: "45%", margin: "16px 0", borderRadius: 8 }}
-      />
-      <p>
-        <strong>Importante:</strong> essa validação deve ser feita pelo perfil do
-        grupo. Ainda não mapeamos com precisão o significado de cada item exibido
-        no perfil do usuário individual, por isso não recomendamos usar essa
-        visão para análise caso não tenha o link do perfil do grupo.
-      </p>
-
-      <h3>5.3 Opção 3: conferir o plano pelo perfil do usuário (EO)</h3>
-      <ol>
-        <li>Com Take Over, acesse o EO (Escritório Online).</li>
-        <li>Clique no ícone da engrenagem → <strong>Plano</strong>.</li>
-        <li>
-          Se aparecer <strong>“Pesquisa Jurídica para Empresas”</strong>, indica
-          que a organização não possui o plano de processos no pacote.
-        </li>
-      </ol>
-      <img
-        src="https://lh3.googleusercontent.com/sitesv/AAzXCkdwhc_NKE7kFHDRtwLavDAH0NaqNuXAsWhoHOYcKvmjVdFhvjnjC_EeOOuZT5WEHWDthA1dyMKt1plik1ZuKs9QJGHWQcPn4VxE7VpE7PR3uccNAxX-SiSUuswtK9rQFeqRADZI8Ud8TgZD7eS0uTrU0wGMxJ--uGpHrC4l3LFJsyH6sys9jK3LeRe-LotGRmpFgBEkSWZu6g1_oSLxPlod-ZLKZT4iqxwk=w1280"
-        alt="Tela de exemplo do Digesto IP"
-        style={{ maxWidth: "45%", margin: "16px 0", borderRadius: 8 }}
-      />
     </>
   );
 }
