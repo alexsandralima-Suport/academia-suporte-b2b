@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { jsPDF } from "jspdf";
 import { questions } from "../../data/questions";
 import { studyContent } from "../../data/studyContent";
@@ -65,7 +66,7 @@ export default function Quiz() {
   const [completedContentIds, setCompletedContentIds] = useState(saved.completedContentIds || []);
 
   // cronômetro
-  const [quizStartTime, setQuizStartTime] = useState(saved.quizStartTime || null);
+  const [quizStartTime, setQuizStartTime] = useState(saved.step === "quiz" ? Date.now() : null);
   const [finalTime, setFinalTime]         = useState(saved.finalTime ?? 0);
   const [timerSeconds, setTimerSeconds]   = useState(0);
 
@@ -95,7 +96,7 @@ export default function Quiz() {
   useEffect(() => {
     localStorage.setItem(
       "academia-b2b-progress",
-      JSON.stringify({ step, current, answers, currentStudyIndex, completedContentIds, quizStartTime, finalTime })
+      JSON.stringify({ step, current, answers, currentStudyIndex, completedContentIds, finalTime })
     );
   }, [step, current, answers, currentStudyIndex, completedContentIds, quizStartTime, finalTime]);
 
@@ -331,8 +332,8 @@ export default function Quiz() {
           {quizCompleted.percentage}% de acertos
           {quizCompleted.tempo ? ` · ⏱ ${formatTime(quizCompleted.tempo)}` : ""}
         </p>
-        <a
-          href="/ranking"
+        <Link
+          to="/ranking"
           style={{
             display: "inline-block",
             background: "#004033", color: "white",
@@ -341,7 +342,7 @@ export default function Quiz() {
           }}
         >
           🏆 Ver ranking
-        </a>
+        </Link>
       </div>
     );
   }
