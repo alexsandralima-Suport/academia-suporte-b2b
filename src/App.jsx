@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Sidebar from "./components/Sidebar.jsx";
 import Home from "./pages/Home.jsx";
 import PasswordGate from "./components/PasswordGate.jsx";
+import ChatWidget from "./components/ChatWidget.jsx";
 
 // FAQs
 import Faq4BIZ from "./pages/faqs/Faq4BIZ.jsx";
@@ -109,6 +110,7 @@ export default function App() {
 
           </main>
         </div>
+        <ChatWidget />
       </BrowserRouter>
     </PasswordGate >
   );
